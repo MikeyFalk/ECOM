@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ECommerce_App.Models.MealsByCategory>
+    
+<ul>
+    @foreach (var mealsByCategory in Model)
+    {
+        <li>
+            @mealsByCategory.MealName
+        </li>
+    }
+
+
+</ul>
