@@ -20,23 +20,23 @@ namespace ECommerce_App.Controllers
         {
             Category category = new Category()
             {
-                Name = "name",
-                Type = "type"
+                name = name,
+                type = type
             };
 
             return View(category);
         }
-        public IActionResult Categories(string name)
+        public IActionResult Categories(string name, string type)
         {
             
 
             List<Category> categories = new List<Category>()
             {
-                new Category(){Name = "Vegan"},
-                new Category(){Name = "Vegetarian", MealName= "rice pilaf", Type = "vegetarian"},
-                new Category(){Name = "Pescatarian"},
-                new Category(){Name = "Dessert"},
-                new Category(){Name = "Comfort"}
+                new Category(){name = "Vegan"},
+                new Category(){name = "Vegetarian", mealName= "rice pilaf", type = "Vegetarian"},
+                new Category(){name = "Pescatarian"},
+                new Category(){name = "Dessert"},
+                new Category(){name = "Comfort"}
             };
             return View(categories);
         }
@@ -46,15 +46,15 @@ namespace ECommerce_App.Controllers
         {
             List<Meal> meal = new List<Meal>()
             {
-            new Meal() { Name = "Vegan Chili", Price = 12, Ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", Nutrition = "healthy", Type = "vegan" },
-            new Meal() { Name = "Pan Fried Tofu w/ veggies", Price = 14, Ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes", Nutrition = "healthy", Type = "vegan" },
-            new Meal() { Name = "Vegan Pizza", Price = 15, Ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese", Nutrition = "healthy", Type = "vegan" },
-            new Meal() { Name = "Salmon with veggies", Price = 18, Ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic", Nutrition = "healthy", Type = "pescatarian" },
-            new Meal() { Name = "Shrimp Fried Rice", Price = 15, Ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas", Nutrition = "healthy", Type = "pescatarian" },
-            new Meal() { Name = "Cod with rice pilaf and veggies", Price = 17, Ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic", Nutrition = "healthy", Type = "pescatarian" },
-            new Meal() { Name = "Tiramisu", Price = 10, Ingredients = "espresso, ladyfingers, custard, cream, cocoa powder", Nutrition = "not healthy", Type = "desert" },
-            new Meal() { Name = "Chocolate Cake", Price = 10, Ingredients = "chocolate, flour, sugar, eggs", Nutrition = "not healthy", Type = "desert" },
-            new Meal() { Name = "Lasagna", Price = 20 , Ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic", Nutrition = "not healthy", Type = "comfort" }
+            new Meal() { name = "Vegan Chili", price = 12, ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", nutrition = "healthy", type = "vegan" },
+            new Meal() { name = "Pan Fried Tofu w/ veggies", price = 14, ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes", nutrition = "healthy", type = "vegan" },
+            new Meal() { name = "Vegan Pizza", price = 15, ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese", nutrition = "healthy", type = "vegan" },
+            new Meal() { name = "Salmon with veggies", price = 18, ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic", nutrition = "healthy", type = "pescatarian" },
+            new Meal() { name = "Shrimp Fried Rice", price = 15, ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas", nutrition = "healthy", type = "pescatarian" },
+            new Meal() { name = "Cod with rice pilaf and veggies", price = 17, ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic", nutrition = "healthy", type = "pescatarian" },
+            new Meal() { name = "Tiramisu", price = 10, ingredients = "espresso, ladyfingers, custard, cream, cocoa powder", nutrition = "not healthy", type = "desert" },
+            new Meal() { name = "Chocolate Cake", price = 10, ingredients = "chocolate, flour, sugar, eggs", nutrition = "not healthy", type = "desert" },
+            new Meal() { name = "Lasagna", price = 20 , ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic", nutrition = "not healthy", type = "comfort" }
         };
 
           return View(meal);
@@ -63,7 +63,7 @@ namespace ECommerce_App.Controllers
         {
       List<MealsByCategory> mealsByCategory = new List<MealsByCategory>()
             {
-                new MealsByCategory(){MealName = "Vegan Chili"}
+                new MealsByCategory(){mealName = "Vegan Chili"}
             };
       return View(mealsByCategory);
         }
