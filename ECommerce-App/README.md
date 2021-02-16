@@ -6,3 +6,4 @@
 
 ## Approach and Planning 
 
+![Erd](./Assets/categoryerd.png)
