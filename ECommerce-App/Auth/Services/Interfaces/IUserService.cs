@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Auth.Services.Interfaces
 {
-  public class IUserService
+  public interface IUserService
   {
     public Task<UserDTO> Register(RegisterDTO data, ModelStateDictionary modelState);
     public Task<UserDTO> Authenticate(string userName, string password);

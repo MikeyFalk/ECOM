@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ECommerce_App.Auth.Services
@@ -41,6 +42,47 @@ namespace ECommerce_App.Auth.Services
           Roles = await userManager.GetRolesAsync(user)
         };
       }
+      foreach(var error in result.Errors)
+      {
+        var errorKey =
+          error.Code.Contains("Password") ? nameof(data.Password) :
+          error.Code.Contains("Email") ? nameof(data.Email) :
+          error.Code.Contains("UserName") ? nameof(data.UserName) :
+          "";
+        modelState.AddModelError(errorKey, error.Description);
+      }
+      return null;
+    }
+    private TimeSpan TimeSpan(object P)
+    {
+      throw new NotImplementedException();
+    }
+
+    public async Task<UserDTO> Authenticate(string userName, string password)
+    {
+      var result = await signInManager.PasswordSignInAsync(userName, password, true, false);
+      if (result.Succeeded)
+      {
+        var user = await userManager.FindByNameAsync(userName);
+        return new UserDTO
+        {
+          Id = user.Id,
+          UserName = user.UserName,
+          Roles = await userManager.GetRolesAsync(user)
+        };
+      }
+      return null;
+    }
+
+    public async Task<UserDTO> GetUser(ClaimsPrincipal principal)
+    {
+      var user = await userManager.GetUserAsync(principal);
+      return new UserDTO
+      {
+        Id = user.Id,
+        UserName = user.UserName,
+        Roles = await userManager.GetRolesAsync(user)
+      };
     }
   }
 }
