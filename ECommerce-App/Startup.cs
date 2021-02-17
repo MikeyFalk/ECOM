@@ -13,6 +13,7 @@ using ECommerce_App.Data;
 using ECommerce_App.Auth.Models;
 using Microsoft.EntityFrameworkCore;
 using ECommerce_App.Auth.Services;
+using ECommerce_App.Auth.Services.Interfaces;
 
 
 namespace ECommerce_App
@@ -20,7 +21,6 @@ namespace ECommerce_App
     public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IConfiguration Configuration { get; set; }
         
         public Startup(IConfiguration configuration)
@@ -48,7 +48,7 @@ namespace ECommerce_App
         {
           options.AddPolicy("create", policy => policy.RequireClaim("permissions", "create"));
           options.AddPolicy("read", policy => policy.RequireClaim("permissions", "read"));
-          options.AddPolicy("update", policy => policy.RequireClaim("permissions", "udpate"));
+          options.AddPolicy("update", policy => policy.RequireClaim("permissions", "update"));
           options.AddPolicy("delete", policy => policy.RequireClaim("permissions", "delete"));
         });
 

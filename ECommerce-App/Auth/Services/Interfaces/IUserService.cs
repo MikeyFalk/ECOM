@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using ECommerce_App.Auth.Models.DTO;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ECommerce_App.Auth.Services.Interfaces
 {
   public class IUserService
   {
-    public Task<UserDTO> Register(RegisterUser data, ModelStateDictionary modelState);
+    public Task<UserDTO> Register(RegisterDTO data, ModelStateDictionary modelState);
     public Task<UserDTO> Authenticate(string userName, string password);
     public Task<UserDTO> GetUser(ClaimsPrincipal user);
   }

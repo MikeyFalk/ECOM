@@ -1,4 +1,7 @@
 ﻿
+using ECommerce_App.Auth.Models;
+using ECommerce_App.Auth.Models.DTO;
+using ECommerce_App.Auth.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
@@ -10,15 +13,15 @@ namespace ECommerce_App.Auth.Services
 {
   public class IdentityUserService : IUserService
   {
-    private UserManager<authUser> userManager;
-    private SignInManager<authUser> signInManager;
-    public IdentityUserService(UserManager<authUser> manager, SignInManager<authUser> sim)
+    private UserManager<AuthUser> userManager;
+    private SignInManager<AuthUser> signInManager;
+    public IdentityUserService(UserManager<AuthUser> manager, SignInManager<AuthUser> sim)
     {
       userManager = manager;
       signInManager = sim;
     } 
 
-    public async Task<UserDTO> Register(RegisterUser data, ModelStateDictionary modelState)
+    public async Task<UserDTO> Register(RegisterDTO data, ModelStateDictionary modelState)
     {
       var user = new AuthUser
       {
@@ -30,9 +33,8 @@ namespace ECommerce_App.Auth.Services
       if (result.Succeeded)
       {
         await userManager.AddToRolesAsync(user, data.Roles);
-        return new UserDTO;
 
-        new UserDTO
+        return new UserDTO
         {
           Id = user.Id,
           UserName = user.UserName,
