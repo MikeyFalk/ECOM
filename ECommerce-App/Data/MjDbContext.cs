@@ -1,4 +1,5 @@
 ﻿using ECommerce_App.Auth.Models;
+using ECommerce_App.Auth.Models.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,21 @@ namespace ECommerce_App.Data
     {
 
     }
+    
+    
+        
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
-      SeedRole(modelBuilder, "Administrator", "read", "create", "udpate", "delete");
-      SeedRole(modelBuilder, "Editor", "read", "create", "udpate");
+      SeedRole(modelBuilder, "Administrator", "read", "create", "update", "delete");
+      SeedRole(modelBuilder, "Editor", "read", "create", "update");
       SeedRole(modelBuilder, "Guest", "read");
+
+
+    modelBuilder.Entity<RegisterDTO>().HasData(
+        new RegisterDTO { UserName = "Admin1", Password = "password!234", Email = "admin@example.com", PhoneNumber ="555-5555", Roles=},
+        
+        )
     }
     private int nextId = 1;
     private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
