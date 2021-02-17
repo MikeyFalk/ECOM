@@ -40,7 +40,7 @@ namespace ECommerce_App.Controllers
             {
                 return Redirect("/login");
             }
-            return Redirect("/login/welcome");
+            return Redirect("/login/profile");
         }
 
         [HttpPost]
@@ -53,7 +53,7 @@ namespace ECommerce_App.Controllers
             {
                 return Redirect("/login");
             }
-            return Redirect("/login/error");
+            return Redirect("/login/welcome");
         }
 
         public IActionResult Welcome()
@@ -64,8 +64,8 @@ namespace ECommerce_App.Controllers
         [Authorize(Policy = "read")]
         public async Task<ActionResult<UserDTO>> Profile()
         {
-      UserDTO user = await userService.GetUser(this.User);
-            return View(user);
+          UserDTO user = await userService.GetUser(this.User);
+          return View(user);
         }
 
     
