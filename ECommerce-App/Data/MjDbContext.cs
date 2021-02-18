@@ -28,10 +28,10 @@ namespace ECommerce_App.Data
       SeedRole(modelBuilder, "Guest", "read");
 
 
-    modelBuilder.Entity<RegisterDTO>().HasData(
-        new RegisterDTO { UserName = "Admin1", Password = "password!234", Email = "admin@example.com", PhoneNumber ="555-5555", Roles=},
-        
-        )
+          //modelBuilder.Entity<RegisterDTO>().HasData(
+            //    new RegisterDTO { UserName = "Admin1", Email = "admin@example.com", PhoneNumber = "555-5555", Roles = new string[] { "administrator", "editor", "guest" } }
+
+              //  );  
     }
     private int nextId = 1;
     private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)

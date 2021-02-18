@@ -26,9 +26,9 @@ namespace ECommerce_App.Auth.Services
     {
       var user = new AuthUser
       {
-        UserName = data.UserName,
+        UserName = data.Username,
         Email = data.Email,
-        PhoneNumber = data.PhoneNumber
+        PhoneNumber = data.Phonenumber
       };
       var result = await userManager.CreateAsync(user, data.Password);
       if (result.Succeeded)
@@ -38,7 +38,7 @@ namespace ECommerce_App.Auth.Services
         return new UserDTO
         {
           Id = user.Id,
-          UserName = user.UserName,
+          Username = user.UserName,
           Roles = await userManager.GetRolesAsync(user)
         };
       }
@@ -47,7 +47,7 @@ namespace ECommerce_App.Auth.Services
         var errorKey =
           error.Code.Contains("Password") ? nameof(data.Password) :
           error.Code.Contains("Email") ? nameof(data.Email) :
-          error.Code.Contains("UserName") ? nameof(data.UserName) :
+          error.Code.Contains("Username") ? nameof(data.Username) :
           "";
         modelState.AddModelError(errorKey, error.Description);
       }
@@ -58,16 +58,16 @@ namespace ECommerce_App.Auth.Services
       throw new NotImplementedException();
     }
 
-    public async Task<UserDTO> Authenticate(string userName, string password)
+    public async Task<UserDTO> Authenticate(string username, string password)
     {
-      var result = await signInManager.PasswordSignInAsync(userName, password, true, false);
+      var result = await signInManager.PasswordSignInAsync(username, password, true, false);
       if (result.Succeeded)
       {
-        var user = await userManager.FindByNameAsync(userName);
+        var user = await userManager.FindByNameAsync(username);
         return new UserDTO
         {
           Id = user.Id,
-          UserName = user.UserName,
+          Username = user.UserName,
           Roles = await userManager.GetRolesAsync(user)
         };
       }
@@ -80,7 +80,7 @@ namespace ECommerce_App.Auth.Services
       return new UserDTO
       {
         Id = user.Id,
-        UserName = user.UserName,
+        Username = user.UserName,
         Roles = await userManager.GetRolesAsync(user)
       };
     }

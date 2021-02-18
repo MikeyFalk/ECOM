@@ -1,5 +1,6 @@
 ﻿using ECommerce_App.Auth.Models.DTO;
 using ECommerce_App.Auth.Services.Interfaces;
+using ECommerce_App.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,10 +23,30 @@ namespace ECommerce_App.Controllers
             return View();
         }
 
-        public IActionResult SignUp()
+        
+        
+       public IActionResult Categories(string name, string type)
+        {
+
+
+                List<Category> categories = new List<Category>()
+            {
+                new Category(){name = "Vegan"},
+                new Category(){name = "Vegetarian", mealName= "rice pilaf", type = "Vegetarian"},
+                new Category(){name = "Pescatarian"},
+                new Category(){name = "Dessert"},
+                new Category(){name = "Comfort"}
+            };
+                return View(categories);
+            }
+     
+
+        public IActionResult Category()
         {
             return View();
         }
+
+
 
         public IActionResult Error()
         {
@@ -35,7 +56,7 @@ namespace ECommerce_App.Controllers
         [HttpPost]
         public async Task<ActionResult<UserDTO>> Authenticate(LoginData data)
         {
-            var user = await userService.Authenticate(data.UserName, data.Password);
+            var user = await userService.Authenticate(data.Username, data.Password);
             if (user == null)
             {
                 return Redirect("/login");
@@ -61,7 +82,7 @@ namespace ECommerce_App.Controllers
                 return View();
         }
 
-        [Authorize(Policy = "read")]
+        //[Authorize(Policy = "read")]
         public async Task<ActionResult<UserDTO>> Profile()
         {
           UserDTO user = await userService.GetUser(this.User);
