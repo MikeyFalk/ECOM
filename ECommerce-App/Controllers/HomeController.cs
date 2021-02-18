@@ -1,4 +1,5 @@
 ﻿using ECommerce_App.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,31 @@ namespace ECommerce_App.Controllers
     {
         public IActionResult Index()
         {
-           
+            /*if (zip != null)
+
+            {
+                CookieOptions cookieOptions = new CookieOptions();
+                cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
+               HttpContext.Response.Cookies.Append("zipCode", zip, cookieOptions);
+            }
+            */
             return View();
 
         }
+        public IActionResult Weather()
+        {
+            string zip = HttpContext.Request.Cookies["zipCode"];
+            ViewData["zip"] = zip;
+            return View();
+        }
 
-        public IActionResult Category(string name, string type)
+
+        //public void SetCookie(string key, string value, int? expireTime)
+        //{
+         //   CookieOptions option = new CookieOptions();
+        //}
+
+       public IActionResult Category(string name, string type)
         {
             Category category = new Category()
             {

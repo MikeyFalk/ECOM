@@ -9,12 +9,12 @@ namespace ECommerce_App.Auth.Models.DTO
   public class RegisterDTO
   {
     [Required]
-    public string UserName { get; set; }
+    public string Username { get; set; }
     [Required]
     public string Password { get; set; }
     [Required]
     public string Email { get; set; }
-    public string PhoneNumber { get; set; }
-    public IList<string> Roles { get; set; }
-  }
+    public string Phonenumber { get; set; }
+    public IList<string> Roles { get; set; } = new string[3];
+    }
 }

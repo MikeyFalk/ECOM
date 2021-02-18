@@ -176,7 +176,7 @@ namespace ECommerce_App.Migrations
                         {
                             Id = 3,
                             ClaimType = "permissions",
-                            ClaimValue = "udpate",
+                            ClaimValue = "update",
                             RoleId = "administrator"
                         },
                         new
@@ -204,7 +204,7 @@ namespace ECommerce_App.Migrations
                         {
                             Id = 7,
                             ClaimType = "permissions",
-                            ClaimValue = "udpate",
+                            ClaimValue = "update",
                             RoleId = "editor"
                         },
                         new

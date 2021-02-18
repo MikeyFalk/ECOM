@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(MjDbContext))]
-    [Migration("20210217040352_initial")]
+    [Migration("20210217233027_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,7 +178,7 @@ namespace ECommerce_App.Migrations
                         {
                             Id = 3,
                             ClaimType = "permissions",
-                            ClaimValue = "udpate",
+                            ClaimValue = "update",
                             RoleId = "administrator"
                         },
                         new
@@ -206,7 +206,7 @@ namespace ECommerce_App.Migrations
                         {
                             Id = 7,
                             ClaimType = "permissions",
-                            ClaimValue = "udpate",
+                            ClaimValue = "update",
                             RoleId = "editor"
                         },
                         new

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ECommerce_App.Models.Category>
+
+<ul>
+    @foreach (var category in Model)
+    {
+        <li>
+            <a asp-controller="Login" asp-action="Category" asp-route-name=@category.type asp-route-type=@category.name>@category.name</a>
+        </li>
+    }
+
+</ul>

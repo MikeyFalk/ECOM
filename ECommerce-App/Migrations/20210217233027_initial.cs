@@ -174,11 +174,11 @@ namespace ECommerce_App.Migrations
                 {
                     { 1, "permissions", "read", "administrator" },
                     { 2, "permissions", "create", "administrator" },
-                    { 3, "permissions", "udpate", "administrator" },
+                    { 3, "permissions", "update", "administrator" },
                     { 4, "permissions", "delete", "administrator" },
                     { 5, "permissions", "read", "editor" },
                     { 6, "permissions", "create", "editor" },
-                    { 7, "permissions", "udpate", "editor" },
+                    { 7, "permissions", "update", "editor" },
                     { 8, "permissions", "read", "guest" }
                 });
 
