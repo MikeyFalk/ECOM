@@ -79,13 +79,13 @@ namespace ECommerce_App.Controllers
 
           return View(meal);
         }
-        public IActionResult MealsByCategory(string mealname)
+        public IActionResult MealsByCategory()
         {
-      List<MealsByCategory> mealsByCategory = new List<MealsByCategory>()
-            {
-                new MealsByCategory(){mealName = "Vegan Chili"}
-            };
-      return View(mealsByCategory);
+      //List<MealsByCategory> mealsByCategory = new List<MealsByCategory>()
+            //{
+            //    new MealsByCategory(){mealName = "Vegan Chili"}
+            //};
+      return View();
         }
 
 

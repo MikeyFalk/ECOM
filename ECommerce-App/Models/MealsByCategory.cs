@@ -7,7 +7,8 @@ namespace ECommerce_App.Models
 {
     public class MealsByCategory
     {
-        public string mealName { get; set; }
-        public List<Meal> Meals  { get; set; } 
+        public int CategoryId { get; set; }
+        public int MealId { get; set; }
+        public Meal meal { get; set; }
     }
 }
