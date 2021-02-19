@@ -16,12 +16,13 @@ namespace ECommerce_App.Controllers
 
     public MealController(IMeal meal)
     {
-      _meal = meal;
+      _meal = meal; 
     }
-    public async Task<IActionResult> Index()
-    {
-      return View();
-    }
+    //public async Task<IActionResult> Index()
+    //{
+    //  return View();
+    //}
+
 
     [AllowAnonymous]
     [HttpGet]
@@ -30,7 +31,6 @@ namespace ECommerce_App.Controllers
       return Ok(await _meal.GetMeals());
     }
 
-    // GET: api/Hotels/5
     [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ActionResult<Meal>> GetMeal(int id)
@@ -40,9 +40,6 @@ namespace ECommerce_App.Controllers
       return meal;
     }
 
-    // PUT: api/Hotels/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for
-    // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
     [Authorize(Roles = "editor")]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateMeal(int id, Meal meal)
@@ -56,21 +53,24 @@ namespace ECommerce_App.Controllers
 
       return Ok(upDatedMeal);
     }
+    public IActionResult CreateMeal()
+    {
+      return View();
+    }
 
-    // POST: api/Hotels
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for
-    // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-    [Authorize(Roles = "administrator")]
+    // [Authorize(Roles = "administrator")]
     [HttpPost]
     public async Task<ActionResult<Meal>> CreateMeal(Meal meal)
     {
 
       await _meal.CreateMeal(meal);
-
+      if(!ModelState.IsValid)
+      {
       return CreatedAtAction("GetMeal", new { id = meal.id }, meal);
+      }
+      return View(meal);
     }
 
-    // DELETE: api/Hotels/5
     [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
     public async Task<ActionResult<Meal>> DeleteMeal(int id)

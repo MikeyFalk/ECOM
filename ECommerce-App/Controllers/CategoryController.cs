@@ -19,10 +19,10 @@ namespace ECommerce_App.Controllers
         {
             _category = category;
         }
-        public async Task<IActionResult> Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         [AllowAnonymous]
         [HttpGet]
@@ -61,7 +61,7 @@ namespace ECommerce_App.Controllers
         // POST: api/Hotels
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [Authorize(Roles = "administrator")]
+        // [Authorize(Roles = "administrator")]
         [HttpPost]
         public async Task<ActionResult<Category>> CreateCategory(Category category)
         {
