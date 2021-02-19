@@ -13,7 +13,7 @@ using ECommerce_App.Data;
 using ECommerce_App.Auth.Models;
 using ECommerce_App.Auth.Services;
 using ECommerce_App.Auth.Services.Interfaces;
-
+using ECommerce_App.Models.Services;
 
 namespace ECommerce_App
 {
@@ -24,17 +24,20 @@ namespace ECommerce_App
         
         public Startup(IConfiguration configuration)
         {
-      Configuration = configuration;
+          Configuration = configuration;
         }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-        services.AddDbContext<MjDbContext>(options =>
+
+      services.AddDbContext<MjDbContext>(options =>
         {
           string connectionString = Configuration.GetConnectionString("DefaultConnection");
           options.UseSqlServer(connectionString);
         });
+          services.AddTransient<ICategory, CategoryRepository>();
+          services.AddTransient<IMeal, MealRepository>();
 
         services.AddIdentity<AuthUser, IdentityRole>(options =>
         {

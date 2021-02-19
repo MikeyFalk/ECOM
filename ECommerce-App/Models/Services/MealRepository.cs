@@ -1,4 +1,5 @@
-﻿using ECommerce_App.Data;
+﻿using ECommerce_App.Auth.Services.Interfaces;
+using ECommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Models.Services
 {
-    public class MealRepository  
+    public class MealRepository : IMeal
     {
         private readonly MjDbContext _context;
 

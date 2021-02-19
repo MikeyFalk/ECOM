@@ -45,9 +45,11 @@ namespace ECommerce_App.Data
 
 
          );
+      // join table below 
+      modelBuilder.Entity<MealsByCategory>().HasKey(MealsByCategory => new { MealsByCategory.MealId, MealsByCategory.CategoryId });
 
 
-            modelBuilder.Entity<Category>().HasData(
+      modelBuilder.Entity<Category>().HasData(
                 new Category() { id = 1, name = "Vegan"},
                 new Category() { id = 2, name = "Vegetarian"},
                 new Category() { id = 3, name = "Pescatarian" },
