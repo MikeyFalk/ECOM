@@ -92,7 +92,7 @@ namespace ECommerce_App.Controllers
                 return View();
         }
 
-        //[Authorize(Policy = "read")]
+        //[Authorize(Roles = "administrator")]
         public async Task<ActionResult<UserDTO>> Profile()
         {
           UserDTO user = await userService.GetUser(this.User);
@@ -104,15 +104,15 @@ namespace ECommerce_App.Controllers
     {
       List<Meal> meal = new List<Meal>()
             {
-            new Meal() { name = "Vegan Chili", price = 12, ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", nutrition = "healthy", type = "vegan" },
-            new Meal() { name = "Pan Fried Tofu w/ veggies", price = 14, ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes", nutrition = "healthy", type = "vegan" },
-            new Meal() { name = "Vegan Pizza", price = 15, ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese", nutrition = "healthy", type = "vegan" },
-            new Meal() { name = "Salmon with veggies", price = 18, ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic", nutrition = "healthy", type = "pescatarian" },
-            new Meal() { name = "Shrimp Fried Rice", price = 15, ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas", nutrition = "healthy", type = "pescatarian" },
-            new Meal() { name = "Cod with rice pilaf and veggies", price = 17, ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic", nutrition = "healthy", type = "pescatarian" },
-            new Meal() { name = "Tiramisu", price = 10, ingredients = "espresso, ladyfingers, custard, cream, cocoa powder", nutrition = "not healthy", type = "desert" },
-            new Meal() { name = "Chocolate Cake", price = 10, ingredients = "chocolate, flour, sugar, eggs", nutrition = "not healthy", type = "desert" },
-            new Meal() { name = "Lasagna", price = 20 , ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic", nutrition = "not healthy", type = "comfort" }
+            new Meal() { id = 1, name = "Vegan Chili", price = 12, ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", nutrition = "healthy", type = "vegan" },
+            new Meal() { id = 2, name = "Pan Fried Tofu w/ veggies", price = 14, ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes", nutrition = "healthy", type = "vegan" },
+            new Meal() { id = 3, name = "Vegan Pizza", price = 15, ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese", nutrition = "healthy", type = "vegan" },
+            new Meal() { id = 4, name = "Salmon with veggies", price = 18, ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic", nutrition = "healthy", type = "pescatarian" },
+            new Meal() { id = 5, name = "Shrimp Fried Rice", price = 15, ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas", nutrition = "healthy", type = "pescatarian" },
+            new Meal() { id = 6, name = "Cod with rice pilaf and veggies", price = 17, ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic", nutrition = "healthy", type = "pescatarian" },
+            new Meal() { id = 7, name = "Tiramisu", price = 10, ingredients = "espresso, ladyfingers, custard, cream, cocoa powder", nutrition = "not healthy", type = "desert" },
+            new Meal() { id = 8, name = "Chocolate Cake", price = 10, ingredients = "chocolate, flour, sugar, eggs", nutrition = "not healthy", type = "desert" },
+            new Meal() { id = 9, name = "Lasagna", price = 20 , ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic", nutrition = "not healthy", type = "comfort" }
         };
 
       return View(meal);
