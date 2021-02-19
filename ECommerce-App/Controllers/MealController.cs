@@ -66,9 +66,10 @@ namespace ECommerce_App.Controllers
       await _meal.CreateMeal(meal);
       if(!ModelState.IsValid)
       {
-      return CreatedAtAction("GetMeal", new { id = meal.id }, meal);
+                //return RedirectToAction("Meal", new { id = meal.id }, meal);
+                return RedirectToAction("Meal/CreateMeal");
       }
-      return View(meal);
+      return View();
     }
 
     [Authorize(Roles = "Administrator")]
