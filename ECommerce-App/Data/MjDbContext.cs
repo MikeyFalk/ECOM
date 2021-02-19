@@ -1,5 +1,6 @@
 ﻿using ECommerce_App.Auth.Models;
 using ECommerce_App.Auth.Models.DTO;
+using ECommerce_App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,10 @@ namespace ECommerce_App.Data
 {
   public class MjDbContext : IdentityDbContext<AuthUser>
   {
+
+    public DbSet<Category> Category { get; set; }
+    public DbSet<Meal> Meal { get; set; }
+
     public MjDbContext(DbContextOptions options) : base(options)
     {
 
@@ -27,11 +32,29 @@ namespace ECommerce_App.Data
       SeedRole(modelBuilder, "Editor", "read", "create", "update");
       SeedRole(modelBuilder, "Guest", "read");
 
+       modelBuilder.Entity<Meal>().HasData(
+        new Meal() { id = 1, name = "Vegan Chili", price = 12, ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", nutrition = "healthy", type = "vegan" },
+        new Meal() { id = 2, name = "Pan Fried Tofu w/ veggies", price = 14, ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes", nutrition = "healthy", type = "vegan" },
+        new Meal() { id = 3, name = "Vegan Pizza", price = 15, ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese", nutrition = "healthy", type = "vegan" },
+        new Meal() { id = 4, name = "Salmon with veggies", price = 18, ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic", nutrition = "healthy", type = "pescatarian" },
+        new Meal() { id = 5, name = "Shrimp Fried Rice", price = 15, ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas", nutrition = "healthy", type = "pescatarian" },
+        new Meal() { id = 6, name = "Cod with rice pilaf and veggies", price = 17, ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic", nutrition = "healthy", type = "pescatarian" },
+        new Meal() { id = 7, name = "Tiramisu", price = 10, ingredients = "espresso, ladyfingers, custard, cream, cocoa powder", nutrition = "not healthy", type = "desert" },
+        new Meal() { id = 8, name = "Chocolate Cake", price = 10, ingredients = "chocolate, flour, sugar, eggs", nutrition = "not healthy", type = "desert" },
+        new Meal() { id = 9, name = "Lasagna", price = 20, ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic", nutrition = "not healthy", type = "comfort" }
 
-          //modelBuilder.Entity<RegisterDTO>().HasData(
-            //    new RegisterDTO { UserName = "Admin1", Email = "admin@example.com", PhoneNumber = "555-5555", Roles = new string[] { "administrator", "editor", "guest" } }
 
-              //  );  
+         );
+
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category() { id = 1, name = "Vegan"},
+                new Category() { id = 2, name = "Vegetarian"},
+                new Category() { id = 3, name = "Pescatarian" },
+                new Category() { id = 4, name = "Dessert" },
+                new Category() { id = 5, name = "Comfort" }
+
+                );            
     }
     private int nextId = 1;
     private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
