@@ -17,31 +17,36 @@ namespace ECommerce_App.Models.Services
             _context = context;
         }
 
-        public async Task AddMeal(int id, string name, int price, string ingredients, string nutrition, string type)
+        public Task AddMeal(int id, string name, int price, string ingredients, string nutrition, string type)
         {
-            Meal meal = new Meal
-            {
-                id = id,
-                name = name,
-                price = price,
-                ingredients = ingredients,
-                nutrition = nutrition,
-                type = type
-
-            };
-
-            _context.Entry(meal).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            await _context.SaveChangesAsync();
-
+            throw new NotImplementedException();
         }
+
+        //public async Task<Meal> AddMeal(Meal meal)
+        //{
+        //    Meal meal = new Meal
+        //    {
+        //        id = id,
+        //        name = name,
+        //        price = price,
+        //        ingredients = ingredients,
+        //        nutrition = nutrition,
+        //        type = type
+
+        //    };
+
+        //    _context.Entry(meal).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+        //    await _context.SaveChangesAsync();
+
+        //}
 
         public async Task<Meal> CreateMeal(Meal meal)
         {
-            _context.Entry(meal).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            await _context.SaveChangesAsync();
+           _context.Entry(meal).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+           await _context.SaveChangesAsync();
 
             return meal;
-        }
+        }  
 
         public async Task DeleteMeal(int id)
         {

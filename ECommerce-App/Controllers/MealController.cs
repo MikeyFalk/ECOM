@@ -11,25 +11,30 @@ namespace ECommerce_App.Controllers
 {
     public class MealController : Controller
     {
-    private readonly IMeal _meal;
+        private readonly IMeal _meal;
 
 
-    public MealController(IMeal meal)
-    {
-      _meal = meal; 
-    }
-    //public async Task<IActionResult> Index()
-    //{
-    //  return View();
-    //}
+        public MealController(IMeal meal)
+        {
+            _meal = meal;
+        }
+        
+       
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Meal>>> GetMeals()
+        {
+            await _meal.GetMeals();
 
+            var meal = new List<Meal>()
+            {
+                
+            };
 
-    [AllowAnonymous]
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Meal>>> GetMeals()
-    {
-      return Ok(await _meal.GetMeals());
-    }
+            
+
+            return View(meal);
+        }
 
     [AllowAnonymous]
     [HttpGet("{id}")]
@@ -48,11 +53,30 @@ namespace ECommerce_App.Controllers
       {
         return BadRequest();
       }
+       
+       //Meal meal = new Meal()
+       //  {
+       //      id = id,
+       //  };     
+
+           
+
+            //return View(meal);
 
       var upDatedMeal = await _meal.UpdateMeal(meal);
 
       return Ok(upDatedMeal);
     }
+   
+    public IActionResult UpdateMeal()
+        {
+            
+
+            return View();
+        }
+        
+        
+        
     public IActionResult CreateMeal()
     {
       return View();
@@ -66,9 +90,10 @@ namespace ECommerce_App.Controllers
       await _meal.CreateMeal(meal);
       if(!ModelState.IsValid)
       {
-      return CreatedAtAction("GetMeal", new { id = meal.id }, meal);
+                //return RedirectToAction("Meal", new { id = meal.id }, meal);
+                return RedirectToAction("Meal/CreateMeal");
       }
-      return View(meal);
+      return View();
     }
 
     [Authorize(Roles = "Administrator")]

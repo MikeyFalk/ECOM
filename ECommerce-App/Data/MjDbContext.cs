@@ -31,7 +31,7 @@ namespace ECommerce_App.Data
       SeedRole(modelBuilder, "Administrator", "read", "create", "update", "delete");
       SeedRole(modelBuilder, "Editor", "read", "create", "update");
       SeedRole(modelBuilder, "Guest", "read");
-
+        //This seeds meals into the meal table 
        modelBuilder.Entity<Meal>().HasData(
         new Meal() { id = 1, name = "Vegan Chili", price = 12, ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", nutrition = "healthy", type = "vegan" },
         new Meal() { id = 2, name = "Pan Fried Tofu w/ veggies", price = 14, ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes", nutrition = "healthy", type = "vegan" },
@@ -50,7 +50,7 @@ namespace ECommerce_App.Data
       // join table below 
       modelBuilder.Entity<MealsByCategory>().HasKey(MealsByCategory => new { MealsByCategory.MealId, MealsByCategory.CategoryId });
 
-
+        //this seed categories into the category table
       modelBuilder.Entity<Category>().HasData(
                 new Category() { id = 1, name = "Vegan"},
                 new Category() { id = 2, name = "Vegetarian"},
