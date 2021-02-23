@@ -42,7 +42,7 @@ namespace ECommerce_App.Models.Services
 
         public async Task<Meal> CreateMeal(Meal meal)
         {
-           _context.Entry(meal).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+           _context.Entry(meal).State = EntityState.Added;
            await _context.SaveChangesAsync();
 
             return meal;
