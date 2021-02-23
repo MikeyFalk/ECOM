@@ -14,6 +14,7 @@ using ECommerce_App.Auth.Models;
 using ECommerce_App.Auth.Services;
 using ECommerce_App.Auth.Services.Interfaces;
 using ECommerce_App.Models.Services;
+using ECommerce_App.Models;
 
 namespace ECommerce_App
 {
@@ -38,6 +39,7 @@ namespace ECommerce_App
         });
           services.AddTransient<ICategory, CategoryRepository>();
           services.AddTransient<IMeal, MealRepository>();
+          services.AddTransient<ICart, CartRepository>();
 
         services.AddIdentity<AuthUser, IdentityRole>(options =>
         {

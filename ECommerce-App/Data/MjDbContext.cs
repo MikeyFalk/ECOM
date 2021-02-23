@@ -17,6 +17,7 @@ namespace ECommerce_App.Data
 
     public DbSet<Category> Category { get; set; }
     public DbSet<Meal> Meal { get; set; }
+    public DbSet<CreateCart> Cart { get; set; }
 
     public MjDbContext(DbContextOptions options) : base(options)
     {
@@ -47,10 +48,11 @@ namespace ECommerce_App.Data
 
 
          );
-      // join table below 
+      // join tables below 
       modelBuilder.Entity<MealsByCategory>().HasKey(MealsByCategory => new { MealsByCategory.MealId, MealsByCategory.CategoryId });
+      modelBuilder.Entity<CartsByUser>().HasKey(CartsByUser => new { CartsByUser.CartId, CartsByUser.UserId });
 
-        //this seed categories into the category table
+      //this seed categories into the category table
       modelBuilder.Entity<Category>().HasData(
                 new Category() { id = 1, name = "Vegan"},
                 new Category() { id = 2, name = "Vegetarian"},
