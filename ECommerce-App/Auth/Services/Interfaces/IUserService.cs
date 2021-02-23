@@ -10,7 +10,7 @@ namespace ECommerce_App.Auth.Services.Interfaces
 {
   public interface IUserService
   {
-    public Task<UserDTO> Register(RegisterDTO data, ModelStateDictionary modelState);
+    public Task<UserDTO> Register(RegisterDTO data);
     public Task<UserDTO> Authenticate(string username, string password);
     public Task<UserDTO> GetUser(ClaimsPrincipal user);
   }

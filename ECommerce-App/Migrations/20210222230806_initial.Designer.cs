@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(MjDbContext))]
-    [Migration("20210219225437_init")]
-    partial class init
+    [Migration("20210222230806_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

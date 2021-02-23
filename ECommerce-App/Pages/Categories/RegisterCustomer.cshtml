@@ -1,0 +1,28 @@
+﻿@page
+@model ECommerce_App.Pages.RegisterCustomerModel
+@{
+}
+<h1>Create a user account here</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Input.Username">Full Name</label>
+        <input asp-for="Input.Username" />
+    </div>
+    <div>
+        <label asp-for="Input.Email">Email</label>
+        <input asp-for="Input.Email" />
+    </div>
+    <div>
+        <label asp-for="Input.Phonenumber">Phone Number</label>
+        <input asp-for="Input.Phonenumber" />
+    </div>
+    <div>
+        <label asp-for="Input.Password">Password</label>
+        <input asp-for="Input.Password" />
+    </div>
+
+    <div>
+        <button>Sign me up!</button>
+    </div>
+</form>

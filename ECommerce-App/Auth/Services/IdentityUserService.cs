@@ -22,7 +22,7 @@ namespace ECommerce_App.Auth.Services
       signInManager = sim;
     } 
 
-    public async Task<UserDTO> Register(RegisterDTO data, ModelStateDictionary modelState)
+    public async Task<UserDTO> Register(RegisterDTO data)
     {
       var user = new AuthUser
       {
@@ -41,15 +41,6 @@ namespace ECommerce_App.Auth.Services
           Username = user.UserName,
           Roles = await userManager.GetRolesAsync(user)
         };
-      }
-      foreach(var error in result.Errors)
-      {
-        var errorKey =
-          error.Code.Contains("Password") ? nameof(data.Password) :
-          error.Code.Contains("Email") ? nameof(data.Email) :
-          error.Code.Contains("Username") ? nameof(data.Username) :
-          "";
-        modelState.AddModelError(errorKey, error.Description);
       }
       return null;
     }
