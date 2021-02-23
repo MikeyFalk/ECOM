@@ -74,11 +74,11 @@ namespace ECommerce_App.Controllers
         {
             data.Roles = new List<string>() { "guest" };
 
-            var user = await userService.Register(data, this.ModelState);
-            if (ModelState.IsValid)
-            {
-                return Redirect("/login");
-            }
+            var user = await userService.Register(data);
+            //if (ModelState.IsValid)
+            //{
+            //    return Redirect("/login");
+            //}
             return Redirect("/login/welcome");
         }
 

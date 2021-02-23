@@ -17,25 +17,25 @@ namespace ECommerce_App.Models.Services
             _context = context;
         }
 
-        public async Task AddCategory(int id, string name, string mealname, string type)
-        {
-            Category category = new Category
-            {
-                id = id,
-                name = name,
-                mealName = mealname,
-                type = type
+        //public async Task AddCategory(int id, string name, string mealname, string type)
+        //{
+        //    Category category = new Category
+        //    {
+        //        id = id,
+        //        name = name,
+        //        mealName = mealname,
+        //        type = type
 
-            };
+        //    };
 
-            _context.Entry(category).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-            await _context.SaveChangesAsync();
+        //    _context.Entry(category).State = EntityState.Added;
+        //    await _context.SaveChangesAsync();
 
-        }
+        //}
 
         public async Task<Category> CreateCategory(Category category)
         {
-            _context.Entry(category).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            _context.Entry(category).State = EntityState.Added;
             await _context.SaveChangesAsync();
 
             return category;
