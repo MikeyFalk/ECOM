@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Auth.Services.Interfaces;
 using ECommerce_App.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,16 +13,30 @@ namespace ECommerce_App.Pages.Cart
     public class CartModel : PageModel
     {
     
-    private readonly ICart cartService;
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public int Id { get; set; }
+        public int Quantity { get; set; }
 
-    public List<CreateCart> Cart { get; set; }
-    public CartModel(ICart service)
-    {
-      cartService = service;
-    }
-        public async Task OnGet(string name)
+   
+        public async Task OnGet()
         {
-           Cart = await cartService.GetCartItems();
+            Name = HttpContext.Request.Cookies["Name"];
+            Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
+            Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
+            Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
+           
+        }
+
+        public void onPost()
+        {
+            CookieOptions cookieOptions = new CookieOptions();
+            cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
+            HttpContext.Response.Cookies.Append("Name", Name, cookieOptions);
+            HttpContext.Response.Cookies.Append("Id", Id.ToString(), cookieOptions);
+            HttpContext.Response.Cookies.Append("Quantity", Quantity.ToString(), cookieOptions);
+            HttpContext.Response.Cookies.Append("Price", Price.ToString(), cookieOptions);
+
         }
     }
 }

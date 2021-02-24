@@ -29,6 +29,7 @@ namespace ECommerce_App
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRazorPages();
             services.AddMvc();
 
 
