@@ -2,3 +2,26 @@
 @model ECommerce_App.Pages.Cart.CartModel
 @{
 }
+
+<h1>Hello, here is your cart</h1> 
+
+<form method="post">
+    <div>
+        <label asp-for="@Model.Name.Value"> Product </label>
+    </div>
+    <div>
+        <label asp-for="@Model.Product.Product.price"> Price </label>
+    </div>
+    <div>
+        <label asp-for="@Model.Id"> Id </label>
+    </div>
+    <div>
+        <input asp-for="@Model.Quantity" />
+    </div>
+    <div>
+      <input type="Submit" title="Pay Now"/>
+    </div>
+
+
+
+</form>

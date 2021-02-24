@@ -4,12 +4,24 @@
 }
 
 <h1>Here are our product offerings</h1>
-
 @if (Model.Products != null)
+
 {
-    @foreach (var product in Model.Products)
+    @foreach (var type in Model.Products)
     {
-        <div>@product.name</div>
-        <div><a asp-page="/products/product" asp-route-id="@product.id">@product.name</a></div>}
+        @type.type
+
+        @if (Model.Products != null)
+        {
+
+            @foreach (var product in Model.Products)
+            {
+
+                <div><a asp-page="/products/product" asp-route-id="@product.id">@product.name</a></div>}
+        }
+
+    }
+
 }
+
 
