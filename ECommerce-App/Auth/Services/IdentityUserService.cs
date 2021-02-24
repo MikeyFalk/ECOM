@@ -37,7 +37,7 @@ namespace ECommerce_App.Auth.Services
 
         return new UserDTO
         {
-          Id = user.Id,
+          userId = user.Id,
           Username = user.UserName,
           Roles = await userManager.GetRolesAsync(user)
         };
@@ -57,7 +57,7 @@ namespace ECommerce_App.Auth.Services
         var user = await userManager.FindByNameAsync(username);
         return new UserDTO
         {
-          Id = user.Id,
+          userId = user.Id,
           Username = user.UserName,
           Roles = await userManager.GetRolesAsync(user)
         };
@@ -70,7 +70,7 @@ namespace ECommerce_App.Auth.Services
       var user = await userManager.GetUserAsync(principal);
       return new UserDTO
       {
-        Id = user.Id,
+        userId = user.Id,
         Username = user.UserName,
         Roles = await userManager.GetRolesAsync(user)
       };

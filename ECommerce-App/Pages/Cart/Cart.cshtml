@@ -7,13 +7,13 @@
 
 <form method="post">
     <div>
-        <label asp-for="@Model.Name.Value"> Product </label>
+        <label asp-for="@Model.Name"> Product : @Model.Name</label>
     </div>
     <div>
-        <label asp-for="@Model.Product.Product.price"> Price </label>
+        <label asp-for="@Model.Price"> Price : @Model.Price </label>
     </div>
     <div>
-        <label asp-for="@Model.Id"> Id </label>
+        <input type="hidden" asp-for="@Model.productId"> 
     </div>
     <div>
         <input asp-for="@Model.Quantity" />

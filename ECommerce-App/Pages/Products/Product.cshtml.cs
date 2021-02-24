@@ -32,7 +32,8 @@ namespace ECommerce_App.Pages.Products
             CookieOptions cookieoption = new CookieOptions();
             cookieoption.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
             HttpContext.Response.Cookies.Append("Name", Product.name, cookieoption);
-            HttpContext.Response.Cookies.Append("Id", Product.id.ToString(), cookieoption);
+            HttpContext.Response.Cookies.Append("Id", Product.productId.ToString(), cookieoption);
+            HttpContext.Response.Cookies.Append("Price", Product.price.ToString(), cookieoption);
 
 
         }

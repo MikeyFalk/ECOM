@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce_App.Auth.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace ECommerce_App.Models
   public class CreateCart
   {
     [Required]
-    public int id { get; set; }
-    public string name { get; set; }
+    public int cartId { get; set; }
     public int price { get; set; }
     public int quantity { get; set; }
-
+    public Meal productId { get; set; }
+    public UserDTO userId { get; set; }
 
   }
 }

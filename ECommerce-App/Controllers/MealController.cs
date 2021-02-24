@@ -38,18 +38,18 @@ namespace ECommerce_App.Controllers
 
     [AllowAnonymous]
     [HttpGet("{id}")]
-    public async Task<ActionResult<Meal>> GetMeal(int id)
+    public async Task<ActionResult<Meal>> GetMeal(int productId)
     {
-      Meal meal = await _meal.GetMeal(id);
+      Meal meal = await _meal.GetMeal(productId);
 
       return meal;
     }
 
     [Authorize(Roles = "editor")]
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateMeal(int id, Meal meal)
+    public async Task<IActionResult> UpdateMeal(int productId, Meal meal)
     {
-      if (id != meal.id)
+      if (productId != meal.productId)
       {
         return BadRequest();
       }
@@ -98,9 +98,9 @@ namespace ECommerce_App.Controllers
 
     [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Meal>> DeleteMeal(int id)
+    public async Task<ActionResult<Meal>> DeleteMeal(int productId)
     {
-      await _meal.DeleteMeal(id);
+      await _meal.DeleteMeal(productId);
 
       return NoContent();
     }

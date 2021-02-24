@@ -1,4 +1,4 @@
-﻿@page "{id}"
+﻿@page "{productId}"
 @model ECommerce_App.Pages.Products.ProductModel
 @{
 }
@@ -28,6 +28,7 @@
 
     </ul>
     <div>
+        <input type="hidden" asp-for="@Model.Product.productId" />
         <button type="submit">Add to Cart</button>
     </div>
 </form>   
