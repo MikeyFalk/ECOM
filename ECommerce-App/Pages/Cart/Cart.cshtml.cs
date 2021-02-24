@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Auth.Services.Interfaces;
 using ECommerce_App.Models;
+using ECommerce_App.Pages.Products;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,18 +12,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace ECommerce_App.Pages.Cart
 {
     public class CartModel : PageModel
-    {
-    
+    {   [BindProperty]
+        public ProductModel Product { get; set; }
+        [BindProperty]
         public string Name { get; set; }
+        [BindProperty]
         public int Price { get; set; }
+        [BindProperty]
         public int Id { get; set; }
+        [BindProperty]
         public int Quantity { get; set; }
 
    
-        public async Task OnGet()
+        public void OnGet()
         {
             Name = HttpContext.Request.Cookies["Name"];
-            Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
+            //Product.Product.price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
             Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
             Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
            

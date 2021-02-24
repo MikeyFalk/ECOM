@@ -3,13 +3,33 @@
 @{
 }
 
-<h2>@Model.Product.name</h2>
-<ul>
-    <li>@Model.Product.ingredients</></li>
-    <li>Price - @Model.Product.price</li> 
-    <li>@Model.Product.nutrition</li>
-    <li>@Model.Product.type</li>
-</ul>
-    
+
+<form method="post">
+    <h2>@Model.Product.name</h2>
+    <input type="hidden" asp-for="@Model.Product.name"/>
+    <ul>
+        
+        <li>
+            <input asp-for="@Model.Product.ingredients" />
+        </li>
+        <li>
+            Price -
+            <input asp-for="@Model.Product.price" />
+        </li>
+
+        <li>
+
+            <input asp-for="@Model.Product.nutrition" />
+        </li>
+        <li>
+            <input asp-for="@Model.Product.type" />
+        </li>
+
+
+    </ul>
+    <div>
+        <button type="submit">Add to Cart</button>
+    </div>
+</form>   
 
 
