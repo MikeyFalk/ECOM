@@ -17,7 +17,11 @@
             @foreach (var product in Model.Products)
             {
 
-                <div><a asp-page="/products/product" asp-route-id="@product.productId">@product.name</a></div>}
+                <div><a asp-page="/products/product" asp-route-id="@product.Id">@product.name</a></div>
+                <div>
+                    <a href="/products/product?id=@product.Id&price=@product.price"></a>
+                </div>
+                }
         }
 
     }

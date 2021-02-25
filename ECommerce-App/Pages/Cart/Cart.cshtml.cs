@@ -19,7 +19,7 @@ namespace ECommerce_App.Pages.Cart
         [BindProperty]
         public int Price { get; set; }
         [BindProperty]
-        public int productId { get; set; }
+        public int Id { get; set; }
         [BindProperty]
         public int Quantity { get; set; }
 
@@ -28,7 +28,7 @@ namespace ECommerce_App.Pages.Cart
         {
             Name = HttpContext.Request.Cookies["Name"];
             Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
-            productId = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
+            Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
             Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
            
         }
@@ -38,7 +38,7 @@ namespace ECommerce_App.Pages.Cart
             CookieOptions cookieOptions = new CookieOptions();
             cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
             HttpContext.Response.Cookies.Append("Name", Name, cookieOptions);
-            HttpContext.Response.Cookies.Append("Id", productId.ToString(), cookieOptions);
+            HttpContext.Response.Cookies.Append("Id", Id.ToString(), cookieOptions);
             HttpContext.Response.Cookies.Append("Quantity", Quantity.ToString(), cookieOptions);
             HttpContext.Response.Cookies.Append("Price", Price.ToString(), cookieOptions);
 

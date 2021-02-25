@@ -1,4 +1,5 @@
-﻿using ECommerce_App.Auth.Models.DTO;
+﻿using ECommerce_App.Auth.Models;
+using ECommerce_App.Auth.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace ECommerce_App.Models
     public int CartId { get; set; }
     public int UserId { get; set; }
     public CreateCart cartId { get; set; }
-    public UserDTO userId { get; set; }
+    public AuthUser Id { get; set; }
     public Meal productId { get; set; }
   }
 }

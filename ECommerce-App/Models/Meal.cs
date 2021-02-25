@@ -8,7 +8,7 @@ namespace ECommerce_App.Models
 {
     public class Meal
     {   [Required]
-        public int productId { get; set; }
+        public int Id { get; set; }
         public string name { get; set; }
         public int price { get; set; }
         public string ingredients { get; set; }

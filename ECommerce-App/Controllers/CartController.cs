@@ -23,16 +23,26 @@ namespace ECommerce_App.Controllers
     {
       return View();
     }
-    public async Task<ActionResult<CreateCart>> AddItemToCart(CreateCart cart)
+    [HttpPost]
+    public async Task<ActionResult<CreateCart>> Create(CreateCart cart) 
+      {
+           await _cart.Create(cart);
+           return CreatedAtAction("GetCartItems", new { id = cart.Id}, cart);
+      }
+
+    [HttpGet]
+    public async Task<ActionResult<CreateCart>> GetCartItems(int id)
     {
-      //_cart.Entry(cart).State = EntityState.Added;
-      //await _cart.SaveChangesAsync();
+      CreateCart cart = await _cart.GetCartItems(id);
       return cart;
     }
 
-    //Task<Cart> GetCartItem(int id);
-    //Task<List<Cart>> GetCartItems();
-    //Task<Cart> UpdateQuantity(Cart cart);
-    //Task DeleteFromCart(int id);
+    [HttpPost]
+    public async Task<ActionResult> AddItemToCart(int cartId, int productId, int price)
+    {
+      await _cart.AddItemToCart(cartId, productId, price);
+      return RedirectToPage("/cart");
+    }
+
   }
 }

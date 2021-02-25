@@ -8,6 +8,7 @@ namespace ECommerce_App.Auth.Services.Interfaces
 {
     public interface ICategory
     {
+        
         Task<Category> CreateCategory(Category category);
 
         Task<Category> GetCategory(int id);
