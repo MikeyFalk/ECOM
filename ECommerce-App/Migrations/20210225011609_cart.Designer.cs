@@ -4,14 +4,16 @@ using ECommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(MjDbContext))]
-    partial class MjDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210225011609_cart")]
+    partial class cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,9 +92,6 @@ namespace ECommerce_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("productId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("price")
                         .HasColumnType("int");
 
                     b.HasKey("cartId", "productId");

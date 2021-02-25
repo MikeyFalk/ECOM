@@ -27,7 +27,7 @@ namespace ECommerce_App.Pages.Cart
         public void OnGet()
         {
             Name = HttpContext.Request.Cookies["Name"];
-            //Product.Product.price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
+            Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
             Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
             Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
            

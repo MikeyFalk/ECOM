@@ -1,4 +1,6 @@
 ﻿using ECommerce_App.Auth.Services.Interfaces;
+using ECommerce_App.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,41 @@ namespace ECommerce_App.Models.Services
 {
   public class CartRepository : ICart
   {
-    public Task<CreateCart> AddItemToCart(CreateCart cart)
+
+    private readonly MjDbContext _context;
+
+    public CartRepository(MjDbContext context)
     {
-      throw new NotImplementedException();
+      _context = context;
+    }
+    public async Task<CreateCart> Create(CreateCart cart)
+    {
+      CreateCart newCart = new CreateCart()
+      {
+        userId = cart.userId
+      };
+
+      _context.Entry(newCart).State = EntityState.Added;
+      await _context.SaveChangesAsync();
+      return newCart;
+    }
+    public async Task<CreateCart> GetCartItems(int id)
+    {
+      CreateCart cart = await _context.Cart.FindAsync(id);
+      return cart;
+    }
+
+    public async Task<CartItem> AddItemToCart(int cartId, int productId, int price) 
+    {
+      CartItem cartItem = new CartItem()
+      {
+        cartId = cartId,
+        productId = productId,
+        price = price
+      };
+      _context.Entry(cartItem).State = EntityState.Added;
+      await _context.SaveChangesAsync();
+      return cartItem;
     }
 
     public Task DeleteFromCart(int id)
@@ -18,15 +52,6 @@ namespace ECommerce_App.Models.Services
       throw new NotImplementedException();
     }
 
-    public Task<CreateCart> GetCartItem(int id)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<List<CreateCart>> GetCartItems()
-    {
-      throw new NotImplementedException();
-    }
 
     public Task<CreateCart> UpdateQuantity(CreateCart cart)
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ECommerce_App.Migrations
 {
-    public partial class init : Migration
+    public partial class pleasework : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,33 +47,6 @@ namespace ECommerce_App.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cart",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    price = table.Column<int>(type: "int", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cart", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CartsByUser",
-                columns: table => new
-                {
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartsByUser", x => new { x.CartId, x.UserId });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -92,7 +65,7 @@ namespace ECommerce_App.Migrations
                 name: "Meal",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     price = table.Column<int>(type: "int", nullable: false),
@@ -102,7 +75,7 @@ namespace ECommerce_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Meal", x => x.id);
+                    table.PrimaryKey("PK_Meal", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +185,28 @@ namespace ECommerce_App.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cart",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    price = table.Column<int>(type: "int", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    userId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    productIdId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cart", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cart_Meal_productIdId",
+                        column: x => x.productIdId,
+                        principalTable: "Meal",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MealsByCategory",
                 columns: table => new
                 {
@@ -231,8 +226,41 @@ namespace ECommerce_App.Migrations
                         name: "FK_MealsByCategory_Meal_MealId",
                         column: x => x.MealId,
                         principalTable: "Meal",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartsByUser",
+                columns: table => new
+                {
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    cartIdId = table.Column<int>(type: "int", nullable: true),
+                    Id1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    productIdId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartsByUser", x => new { x.CartId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_CartsByUser_AspNetUsers_Id1",
+                        column: x => x.Id1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CartsByUser_Cart_cartIdId",
+                        column: x => x.cartIdId,
+                        principalTable: "Cart",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CartsByUser_Meal_productIdId",
+                        column: x => x.productIdId,
+                        principalTable: "Meal",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -259,7 +287,7 @@ namespace ECommerce_App.Migrations
 
             migrationBuilder.InsertData(
                 table: "Meal",
-                columns: new[] { "id", "ingredients", "name", "nutrition", "price", "type" },
+                columns: new[] { "Id", "ingredients", "name", "nutrition", "price", "type" },
                 values: new object[,]
                 {
                     { 1, "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", "Vegan Chili", "healthy", 12, "vegan" },
@@ -328,6 +356,26 @@ namespace ECommerce_App.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cart_productIdId",
+                table: "Cart",
+                column: "productIdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartsByUser_cartIdId",
+                table: "CartsByUser",
+                column: "cartIdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartsByUser_Id1",
+                table: "CartsByUser",
+                column: "Id1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartsByUser_productIdId",
+                table: "CartsByUser",
+                column: "productIdId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MealsByCategory_CategoryId",
                 table: "MealsByCategory",
                 column: "CategoryId");
@@ -351,9 +399,6 @@ namespace ECommerce_App.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cart");
-
-            migrationBuilder.DropTable(
                 name: "CartsByUser");
 
             migrationBuilder.DropTable(
@@ -364,6 +409,9 @@ namespace ECommerce_App.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Category");

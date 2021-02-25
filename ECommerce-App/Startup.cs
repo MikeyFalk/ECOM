@@ -41,8 +41,9 @@ namespace ECommerce_App
           services.AddTransient<ICategory, CategoryRepository>();
           services.AddTransient<IMeal, MealRepository>();
           services.AddTransient<ICart, CartRepository>();
+          services.AddTransient<IUserService, IdentityUserService>();
 
-        services.AddIdentity<AuthUser, IdentityRole>(options =>
+      services.AddIdentity<AuthUser, IdentityRole>(options =>
         {
           options.User.RequireUniqueEmail = true;
 
@@ -57,7 +58,7 @@ namespace ECommerce_App
           options.AddPolicy("delete", policy => policy.RequireClaim("permissions", "delete"));
         });
 
-        services.AddTransient<IUserService, IdentityUserService>();
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

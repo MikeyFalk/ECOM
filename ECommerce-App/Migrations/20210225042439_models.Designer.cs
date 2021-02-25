@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(MjDbContext))]
-    [Migration("20210223230523_init")]
-    partial class init
+    [Migration("20210225042439_models")]
+    partial class models
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,22 @@ namespace ECommerce_App.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("ECommerce_App.Models.CartItem", b =>
+                {
+                    b.Property<int>("cartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.HasKey("cartId", "productId");
+
+                    b.ToTable("CartItem");
+                });
+
             modelBuilder.Entity("ECommerce_App.Models.CartsByUser", b =>
                 {
                     b.Property<int>("CartId")
@@ -94,7 +110,22 @@ namespace ECommerce_App.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Id1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("cartIdId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("productIdId")
+                        .HasColumnType("int");
+
                     b.HasKey("CartId", "UserId");
+
+                    b.HasIndex("Id1");
+
+                    b.HasIndex("cartIdId");
+
+                    b.HasIndex("productIdId");
 
                     b.ToTable("CartsByUser");
                 });
@@ -149,28 +180,33 @@ namespace ECommerce_App.Migrations
 
             modelBuilder.Entity("ECommerce_App.Models.CreateCart", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("productIdId")
                         .HasColumnType("int");
 
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("productIdId");
 
                     b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("ECommerce_App.Models.Meal", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -190,14 +226,14 @@ namespace ECommerce_App.Migrations
                     b.Property<string>("type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Meal");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic",
                             name = "Vegan Chili",
                             nutrition = "healthy",
@@ -206,7 +242,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes",
                             name = "Pan Fried Tofu w/ veggies",
                             nutrition = "healthy",
@@ -215,7 +251,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese",
                             name = "Vegan Pizza",
                             nutrition = "healthy",
@@ -224,7 +260,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 4,
+                            Id = 4,
                             ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic",
                             name = "Salmon with veggies",
                             nutrition = "healthy",
@@ -233,7 +269,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 5,
+                            Id = 5,
                             ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas",
                             name = "Shrimp Fried Rice",
                             nutrition = "healthy",
@@ -242,7 +278,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 6,
+                            Id = 6,
                             ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic",
                             name = "Cod with rice pilaf and veggies",
                             nutrition = "healthy",
@@ -251,7 +287,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 7,
+                            Id = 7,
                             ingredients = "espresso, ladyfingers, custard, cream, cocoa powder",
                             name = "Tiramisu",
                             nutrition = "not healthy",
@@ -260,7 +296,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 8,
+                            Id = 8,
                             ingredients = "chocolate, flour, sugar, eggs",
                             name = "Chocolate Cake",
                             nutrition = "not healthy",
@@ -269,7 +305,7 @@ namespace ECommerce_App.Migrations
                         },
                         new
                         {
-                            id = 9,
+                            Id = 9,
                             ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic",
                             name = "Lasagna",
                             nutrition = "not healthy",
@@ -503,6 +539,36 @@ namespace ECommerce_App.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ECommerce_App.Models.CartsByUser", b =>
+                {
+                    b.HasOne("ECommerce_App.Auth.Models.AuthUser", "Id")
+                        .WithMany()
+                        .HasForeignKey("Id1");
+
+                    b.HasOne("ECommerce_App.Models.CreateCart", "cartId")
+                        .WithMany()
+                        .HasForeignKey("cartIdId");
+
+                    b.HasOne("ECommerce_App.Models.Meal", "productId")
+                        .WithMany()
+                        .HasForeignKey("productIdId");
+
+                    b.Navigation("cartId");
+
+                    b.Navigation("Id");
+
+                    b.Navigation("productId");
+                });
+
+            modelBuilder.Entity("ECommerce_App.Models.CreateCart", b =>
+                {
+                    b.HasOne("ECommerce_App.Models.Meal", "productId")
+                        .WithMany()
+                        .HasForeignKey("productIdId");
+
+                    b.Navigation("productId");
                 });
 
             modelBuilder.Entity("ECommerce_App.Models.MealsByCategory", b =>

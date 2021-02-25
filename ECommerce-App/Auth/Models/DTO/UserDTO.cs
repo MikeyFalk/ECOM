@@ -9,7 +9,7 @@ namespace ECommerce_App.Auth.Models.DTO
   {
     public string Id { get; set; }
     public string Username { get; set; }
-    public IList<string> Roles { get; set; } = new string[3];
+    public IList<string> Roles { get; set; } // = new string[3];
      
   }
 }

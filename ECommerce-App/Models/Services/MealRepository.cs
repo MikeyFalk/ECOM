@@ -17,7 +17,7 @@ namespace ECommerce_App.Models.Services
             _context = context;
         }
 
-        public Task AddMeal(int id, string name, int price, string ingredients, string nutrition, string type)
+        public Task AddMeal(int productId, string name, int price, string ingredients, string nutrition, string type)
         {
             throw new NotImplementedException();
         }
@@ -48,16 +48,16 @@ namespace ECommerce_App.Models.Services
             return meal;
         }  
 
-        public async Task DeleteMeal(int id)
+        public async Task DeleteMeal(int productId)
         {
-            Meal meal = await GetMeal(id);
+            Meal meal = await GetMeal(productId);
             _context.Entry(meal).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Meal> GetMeal(int id)
+        public async Task<Meal> GetMeal(int productId)
         {
-            Meal meal = await _context.Meal.FindAsync(id);
+            Meal meal = await _context.Meal.FindAsync(productId);
             return meal;
         }
 

@@ -8,10 +8,10 @@ namespace ECommerce_App.Auth.Services.Interfaces
 {
   public interface ICart
   {
-    Task<CreateCart> AddItemToCart(CreateCart cart);
+    Task<CreateCart> Create(CreateCart cart);
+    Task<CartItem> AddItemToCart(int cartId, int productId, int price);
 
-    Task<CreateCart> GetCartItem(int id);
-    Task<List<CreateCart>> GetCartItems();
+    Task<CreateCart> GetCartItems(int id);
     Task<CreateCart> UpdateQuantity(CreateCart cart);
     Task DeleteFromCart(int id);
 
