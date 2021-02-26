@@ -48,16 +48,16 @@ namespace ECommerce_App.Models.Services
             return meal;
         }  
 
-        public async Task DeleteMeal(int productId)
+        public async Task DeleteMeal(int mealId)
         {
-            Meal meal = await GetMeal(productId);
+            Meal meal = await GetMeal(mealId);
             _context.Entry(meal).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Meal> GetMeal(int productId)
+        public async Task<Meal> GetMeal(int mealId)
         {
-            Meal meal = await _context.Meal.FindAsync(productId);
+            Meal meal = await _context.Meal.FindAsync(mealId);
             return meal;
         }
 

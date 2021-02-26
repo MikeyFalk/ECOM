@@ -30,17 +30,19 @@ namespace ECommerce_App.Models.Services
     }
     public async Task<CreateCart> GetCartItems(int id)
     {
-      CreateCart cart = await _context.Cart.FindAsync(id);
+      CreateCart cart = await _context.CreateCart.FindAsync(id);
       return cart;
     }
 
-    public async Task<CartItem> AddItemToCart(int cartId, int productId, int price) 
+    public async Task<CartItem> AddItemToCart(int mealId, int price, string userId, int cartId) 
     {
       CartItem cartItem = new CartItem()
       {
-        cartId = cartId,
-        productId = productId,
-        price = price
+       
+        mealId = mealId,
+        price = price,
+        userId = userId,
+        cartId = cartId
       };
       _context.Entry(cartItem).State = EntityState.Added;
       await _context.SaveChangesAsync();

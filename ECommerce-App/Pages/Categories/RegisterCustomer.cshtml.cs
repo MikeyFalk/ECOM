@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce_App.Auth.Models.DTO;
 using ECommerce_App.Auth.Services.Interfaces;
+using ECommerce_App.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,12 +14,15 @@ namespace ECommerce_App.Pages
     public class RegisterCustomerModel : PageModel
     {
     public IUserService userService { get; }
-
+    public ICart cartService { get; set; }
     [BindProperty]
     public CustomerModel Input { get; set; }
-    public RegisterCustomerModel(IUserService service)
+    [BindProperty]
+    public CreateCart CreateCart { get; set; }
+    public RegisterCustomerModel(IUserService service, ICart newCartService)
     {
       userService = service;
+      cartService = newCartService;
     }
      public void OnGet()
      {
@@ -40,8 +44,14 @@ namespace ECommerce_App.Pages
         Roles = new List<string>() { "guest" }
     };
       
-      await userService.Register(registerDTO);
-      return RedirectToPage("/Categories/Index");
+      var newUsers = await userService.Register(registerDTO);
+      CreateCart cart = new CreateCart
+      {
+                userId = newUsers.Id
+      };
+
+     await cartService.Create(cart);
+     return RedirectToPage("/Categories/Index");
     }
     public class CustomerModel
     {
@@ -49,7 +59,10 @@ namespace ECommerce_App.Pages
       public string Password { get; set; }
       public string Email { get; set; }
       public string Phonenumber { get; set; }
+      public string UserId { get; set; }
+      
       public IList<string> Roles { get; set; } 
+      public CreateCart cart { get; set; }
     }
 
    
