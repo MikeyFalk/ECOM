@@ -15,7 +15,7 @@ namespace ECommerce_App.Models
     public int price { get; set; }
     public int quantity { get; set; }
     public string userId { get; set; }
-    public Meal productId { get; set; }
+    public List<CartItem> cartItem { get; set; }
 
   }
 }

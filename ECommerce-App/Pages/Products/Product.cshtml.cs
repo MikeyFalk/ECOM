@@ -23,6 +23,8 @@ namespace ECommerce_App.Pages.Products
 
     private readonly ICart cartService;
 
+    
+
     public ProductModel(IMeal service, ICart newCartService)
     {
       mealService = service;
@@ -31,21 +33,24 @@ namespace ECommerce_App.Pages.Products
 
     }
     
-    public async Task OnGet(int id, int cartId, int productId, int price)
+    public async Task OnGet(int id, int mealId, int price)
         {
             Product = await mealService.GetMeal(id);
-            CartInput = await cartService.AddItemToCart(cartId, productId, price);
+            //CartInput = await cartService.AddItemToCart(cartId, mealId, price);
         }
 
         public async Task OnPostAsync()
         {
           CartItem cartItem = new CartItem()
           {
-                  productId = CartInput.productId,
-                  cartId = CartInput.cartId,
-                  price = CartInput.price
+                  mealId = CartInput.mealId,                 
+                  price = CartInput.price,
+                  userId = CartInput.userId,
+                  cartId = CartInput.cartId
+
           };
-          CartItem record = await cartService.AddItemToCart(CartInput.cartId, CartInput.productId, CartInput.price);
+            
+            CartItem record = await cartService.AddItemToCart( CartInput.mealId, CartInput.price, CartInput.userId, CartInput.cartId);
      
 
             //CookieOptions cookieoption = new CookieOptions();

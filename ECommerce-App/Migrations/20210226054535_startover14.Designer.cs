@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(MjDbContext))]
-    [Migration("20210225042439_models")]
-    partial class models
+    [Migration("20210226054535_startover14")]
+    partial class startover14
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,43 +91,21 @@ namespace ECommerce_App.Migrations
                     b.Property<int>("cartId")
                         .HasColumnType("int");
 
-                    b.Property<int>("productId")
+                    b.Property<int>("mealId")
                         .HasColumnType("int");
 
                     b.Property<int>("price")
                         .HasColumnType("int");
 
-                    b.HasKey("cartId", "productId");
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("cartId", "mealId");
+
+                    b.HasIndex("mealId")
+                        .IsUnique();
 
                     b.ToTable("CartItem");
-                });
-
-            modelBuilder.Entity("ECommerce_App.Models.CartsByUser", b =>
-                {
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Id1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("cartIdId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("productIdId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartId", "UserId");
-
-                    b.HasIndex("Id1");
-
-                    b.HasIndex("cartIdId");
-
-                    b.HasIndex("productIdId");
-
-                    b.ToTable("CartsByUser");
                 });
 
             modelBuilder.Entity("ECommerce_App.Models.Category", b =>
@@ -188,9 +166,6 @@ namespace ECommerce_App.Migrations
                     b.Property<int>("price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("productIdId")
-                        .HasColumnType("int");
-
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
@@ -199,9 +174,7 @@ namespace ECommerce_App.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("productIdId");
-
-                    b.ToTable("Cart");
+                    b.ToTable("CreateCart");
                 });
 
             modelBuilder.Entity("ECommerce_App.Models.Meal", b =>
@@ -541,34 +514,23 @@ namespace ECommerce_App.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ECommerce_App.Models.CartsByUser", b =>
+            modelBuilder.Entity("ECommerce_App.Models.CartItem", b =>
                 {
-                    b.HasOne("ECommerce_App.Auth.Models.AuthUser", "Id")
-                        .WithMany()
-                        .HasForeignKey("Id1");
+                    b.HasOne("ECommerce_App.Models.CreateCart", "cart")
+                        .WithMany("cartItem")
+                        .HasForeignKey("cartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("ECommerce_App.Models.CreateCart", "cartId")
-                        .WithMany()
-                        .HasForeignKey("cartIdId");
+                    b.HasOne("ECommerce_App.Models.Meal", "meal")
+                        .WithOne("cartItem")
+                        .HasForeignKey("ECommerce_App.Models.CartItem", "mealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("ECommerce_App.Models.Meal", "productId")
-                        .WithMany()
-                        .HasForeignKey("productIdId");
+                    b.Navigation("cart");
 
-                    b.Navigation("cartId");
-
-                    b.Navigation("Id");
-
-                    b.Navigation("productId");
-                });
-
-            modelBuilder.Entity("ECommerce_App.Models.CreateCart", b =>
-                {
-                    b.HasOne("ECommerce_App.Models.Meal", "productId")
-                        .WithMany()
-                        .HasForeignKey("productIdId");
-
-                    b.Navigation("productId");
+                    b.Navigation("meal");
                 });
 
             modelBuilder.Entity("ECommerce_App.Models.MealsByCategory", b =>
@@ -642,6 +604,16 @@ namespace ECommerce_App.Migrations
             modelBuilder.Entity("ECommerce_App.Models.Category", b =>
                 {
                     b.Navigation("ListOfMeals");
+                });
+
+            modelBuilder.Entity("ECommerce_App.Models.CreateCart", b =>
+                {
+                    b.Navigation("cartItem");
+                });
+
+            modelBuilder.Entity("ECommerce_App.Models.Meal", b =>
+                {
+                    b.Navigation("cartItem");
                 });
 #pragma warning restore 612, 618
         }

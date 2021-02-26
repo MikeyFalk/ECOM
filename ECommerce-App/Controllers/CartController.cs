@@ -38,9 +38,9 @@ namespace ECommerce_App.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> AddItemToCart(int cartId, int productId, int price)
+    public async Task<ActionResult> AddItemToCart(int mealId, int price, string userId, int cartId)
     {
-      await _cart.AddItemToCart(cartId, productId, price);
+      await _cart.AddItemToCart(mealId, price, userId, cartId);
       return RedirectToPage("/cart");
     }
 

@@ -15,6 +15,10 @@ namespace ECommerce_App.Auth.Models.DTO
     [Required]
     public string Email { get; set; }
     public string Phonenumber { get; set; }
-    public IList<string> Roles { get; set; } = new string[3];
+    public IList<string> Roles { get; set; }
+
+   
+
+    
     }
 }
