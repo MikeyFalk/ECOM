@@ -14,7 +14,7 @@ namespace ECommerce_App.Pages.Products
     
     public class ProductModel : PageModel
     {
-    public IUserService userService { get; set; }
+    public IUserService UserService { get; set; }
 
     public string id;
    
@@ -35,7 +35,7 @@ namespace ECommerce_App.Pages.Products
     {
       mealService = service;
       cartService = newCartService;
-      userService = uService;
+      UserService = uService;
       CartInput = new CartItem();
       
 
@@ -54,22 +54,25 @@ namespace ECommerce_App.Pages.Products
         {
             // get user id from cookies
             // call get cart 
-            var userId = await this.userService.GetUser(this.User);
+
+            //var userId = await this.userService.GetUser(this.User);
             
-            CreateCart cart = await cartService.GetOne(user);
+            //var UserId = HttpContext.Request.Cookies["userId"];
+
+            //CreateCart cart = await cartService.GetOne(user);
 
             CartItem cartItem = new CartItem()
             {
-                mealId = Product.Id,
-                price = Product.price,
-                cartId = cart.Id
+                MealId = Product.Id,
+                Price = Product.Price,
+                
 
             };
             //in get  cartcontroller to do logic to grab cart by user id (will be a string)
 
             //then add item cart
 
-            CartItem record = await cartService.AddItemToCart( CartInput.mealId, CartInput.price, CartInput.cart.Id);
+            CartItem record = await cartService.AddItemToCart( cartItem.MealId, cartItem.Price, cartItem.CreateCartId);
 
 
             //CookieOptions cookieoption = new CookieOptions();

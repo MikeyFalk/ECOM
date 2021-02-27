@@ -12,7 +12,7 @@ namespace ECommerce_App.Models
 
         
         //navigation properties
-        public Meal meal { get; set; }
-        public Category category { get; set; }
+        public Meal Meal { get; set; }
+        public Category Category { get; set; }
     }
 }

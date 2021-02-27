@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ECommerce_App.Migrations
 {
-    public partial class startOver3 : Migration
+    public partial class startOver8 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,15 +50,15 @@ namespace ECommerce_App.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    mealName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MealName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.id);
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,9 +67,9 @@ namespace ECommerce_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    price = table.Column<int>(type: "int", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,11 +82,11 @@ namespace ECommerce_App.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    price = table.Column<int>(type: "int", nullable: false),
-                    ingredients = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    nutrition = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    Ingredients = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nutrition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -203,29 +203,29 @@ namespace ECommerce_App.Migrations
                 name: "CartItem",
                 columns: table => new
                 {
-                    cartId = table.Column<int>(type: "int", nullable: false),
-                    mealId = table.Column<int>(type: "int", nullable: false),
-                    price = table.Column<int>(type: "int", nullable: false),
-                    Categoryid = table.Column<int>(type: "int", nullable: true)
+                    CreateCartId = table.Column<int>(type: "int", nullable: false),
+                    MealId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartItem", x => new { x.cartId, x.mealId });
+                    table.PrimaryKey("PK_CartItem", x => new { x.MealId, x.CreateCartId });
                     table.ForeignKey(
-                        name: "FK_CartItem_Category_Categoryid",
-                        column: x => x.Categoryid,
+                        name: "FK_CartItem_Category_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Category",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_CartItem_CreateCart_cartId",
-                        column: x => x.cartId,
+                        name: "FK_CartItem_CreateCart_CreateCartId",
+                        column: x => x.CreateCartId,
                         principalTable: "CreateCart",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CartItem_Meal_mealId",
-                        column: x => x.mealId,
+                        name: "FK_CartItem_Meal_MealId",
+                        column: x => x.MealId,
                         principalTable: "Meal",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -245,7 +245,7 @@ namespace ECommerce_App.Migrations
                         name: "FK_MealsByCategory_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MealsByCategory_Meal_MealId",
@@ -267,7 +267,7 @@ namespace ECommerce_App.Migrations
 
             migrationBuilder.InsertData(
                 table: "Category",
-                columns: new[] { "id", "mealName", "name", "type" },
+                columns: new[] { "Id", "MealName", "Name", "Type" },
                 values: new object[,]
                 {
                     { 5, null, "Comfort", null },
@@ -279,7 +279,7 @@ namespace ECommerce_App.Migrations
 
             migrationBuilder.InsertData(
                 table: "Meal",
-                columns: new[] { "Id", "ingredients", "name", "nutrition", "price", "type" },
+                columns: new[] { "Id", "Ingredients", "Name", "Nutrition", "Price", "Type" },
                 values: new object[,]
                 {
                     { 1, "beans, tomatoes, olive oil, tofu crumbles, spices, garlic", "Vegan Chili", "healthy", 12, "vegan" },
@@ -348,14 +348,19 @@ namespace ECommerce_App.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItem_Categoryid",
+                name: "IX_CartItem_CategoryId",
                 table: "CartItem",
-                column: "Categoryid");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItem_mealId",
+                name: "IX_CartItem_CreateCartId",
                 table: "CartItem",
-                column: "mealId",
+                column: "CreateCartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItem_MealId",
+                table: "CartItem",
+                column: "MealId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce_App.Migrations
 {
     [DbContext(typeof(MjDbContext))]
-    [Migration("20210227014705_startOver3")]
-    partial class startOver3
+    [Migration("20210227073933_startOver8")]
+    partial class startOver8
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,23 +88,25 @@ namespace ECommerce_App.Migrations
 
             modelBuilder.Entity("ECommerce_App.Models.CartItem", b =>
                 {
-                    b.Property<int>("cartId")
+                    b.Property<int>("MealId")
                         .HasColumnType("int");
 
-                    b.Property<int>("mealId")
+                    b.Property<int>("CreateCartId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Categoryid")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("price")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.HasKey("cartId", "mealId");
+                    b.HasKey("MealId", "CreateCartId");
 
-                    b.HasIndex("Categoryid");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("mealId")
+                    b.HasIndex("CreateCartId");
+
+                    b.HasIndex("MealId")
                         .IsUnique();
 
                     b.ToTable("CartItem");
@@ -112,49 +114,49 @@ namespace ECommerce_App.Migrations
 
             modelBuilder.Entity("ECommerce_App.Models.Category", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("mealName")
+                    b.Property<string>("MealName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("type")
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Category");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            name = "Vegan"
+                            Id = 1,
+                            Name = "Vegan"
                         },
                         new
                         {
-                            id = 2,
-                            name = "Vegetarian"
+                            Id = 2,
+                            Name = "Vegetarian"
                         },
                         new
                         {
-                            id = 3,
-                            name = "Pescatarian"
+                            Id = 3,
+                            Name = "Pescatarian"
                         },
                         new
                         {
-                            id = 4,
-                            name = "Dessert"
+                            Id = 4,
+                            Name = "Dessert"
                         },
                         new
                         {
-                            id = 5,
-                            name = "Comfort"
+                            Id = 5,
+                            Name = "Comfort"
                         });
                 });
 
@@ -165,13 +167,13 @@ namespace ECommerce_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("price")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("userId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -186,19 +188,19 @@ namespace ECommerce_App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ingredients")
+                    b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("nutrition")
+                    b.Property<string>("Nutrition")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("price")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<string>("type")
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -209,83 +211,83 @@ namespace ECommerce_App.Migrations
                         new
                         {
                             Id = 1,
-                            ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic",
-                            name = "Vegan Chili",
-                            nutrition = "healthy",
-                            price = 12,
-                            type = "vegan"
+                            Ingredients = "beans, tomatoes, olive oil, tofu crumbles, spices, garlic",
+                            Name = "Vegan Chili",
+                            Nutrition = "healthy",
+                            Price = 12,
+                            Type = "vegan"
                         },
                         new
                         {
                             Id = 2,
-                            ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes",
-                            name = "Pan Fried Tofu w/ veggies",
-                            nutrition = "healthy",
-                            price = 14,
-                            type = "vegan"
+                            Ingredients = "tofu, olive oil, spices, garlic, green beans, potatoes",
+                            Name = "Pan Fried Tofu w/ veggies",
+                            Nutrition = "healthy",
+                            Price = 14,
+                            Type = "vegan"
                         },
                         new
                         {
                             Id = 3,
-                            ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese",
-                            name = "Vegan Pizza",
-                            nutrition = "healthy",
-                            price = 15,
-                            type = "vegan"
+                            Ingredients = "olives, tomato sauce, olive oil, tofu crumbles, spices, garlic, vegan cheese",
+                            Name = "Vegan Pizza",
+                            Nutrition = "healthy",
+                            Price = 15,
+                            Type = "vegan"
                         },
                         new
                         {
                             Id = 4,
-                            ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic",
-                            name = "Salmon with veggies",
-                            nutrition = "healthy",
-                            price = 18,
-                            type = "pescatarian"
+                            Ingredients = "Salmon filets, cherry tomatoes, olive oil, asparagus, spices, garlic",
+                            Name = "Salmon with veggies",
+                            Nutrition = "healthy",
+                            Price = 18,
+                            Type = "pescatarian"
                         },
                         new
                         {
                             Id = 5,
-                            ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas",
-                            name = "Shrimp Fried Rice",
-                            nutrition = "healthy",
-                            price = 15,
-                            type = "pescatarian"
+                            Ingredients = "Shrimp, rice, olive oil, egg, spices, garlic, carrots, peas",
+                            Name = "Shrimp Fried Rice",
+                            Nutrition = "healthy",
+                            Price = 15,
+                            Type = "pescatarian"
                         },
                         new
                         {
                             Id = 6,
-                            ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic",
-                            name = "Cod with rice pilaf and veggies",
-                            nutrition = "healthy",
-                            price = 17,
-                            type = "pescatarian"
+                            Ingredients = "Cod, rice pilaf, olive oil, green beans, spices, garlic",
+                            Name = "Cod with rice pilaf and veggies",
+                            Nutrition = "healthy",
+                            Price = 17,
+                            Type = "pescatarian"
                         },
                         new
                         {
                             Id = 7,
-                            ingredients = "espresso, ladyfingers, custard, cream, cocoa powder",
-                            name = "Tiramisu",
-                            nutrition = "not healthy",
-                            price = 10,
-                            type = "desert"
+                            Ingredients = "espresso, ladyfingers, custard, cream, cocoa powder",
+                            Name = "Tiramisu",
+                            Nutrition = "not healthy",
+                            Price = 10,
+                            Type = "desert"
                         },
                         new
                         {
                             Id = 8,
-                            ingredients = "chocolate, flour, sugar, eggs",
-                            name = "Chocolate Cake",
-                            nutrition = "not healthy",
-                            price = 10,
-                            type = "desert"
+                            Ingredients = "chocolate, flour, sugar, eggs",
+                            Name = "Chocolate Cake",
+                            Nutrition = "not healthy",
+                            Price = 10,
+                            Type = "desert"
                         },
                         new
                         {
                             Id = 9,
-                            ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic",
-                            name = "Lasagna",
-                            nutrition = "not healthy",
-                            price = 20,
-                            type = "comfort"
+                            Ingredients = "cheese, tomatoes, Italian sausage, noodles, spices, garlic",
+                            Name = "Lasagna",
+                            Nutrition = "not healthy",
+                            Price = 20,
+                            Type = "comfort"
                         });
                 });
 
@@ -520,42 +522,42 @@ namespace ECommerce_App.Migrations
                 {
                     b.HasOne("ECommerce_App.Models.Category", null)
                         .WithMany("ListOfMeals")
-                        .HasForeignKey("Categoryid");
+                        .HasForeignKey("CategoryId");
 
-                    b.HasOne("ECommerce_App.Models.CreateCart", "cart")
-                        .WithMany("cartItem")
-                        .HasForeignKey("cartId")
+                    b.HasOne("ECommerce_App.Models.CreateCart", "CreateCart")
+                        .WithMany("CartItem")
+                        .HasForeignKey("CreateCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ECommerce_App.Models.Meal", "meal")
-                        .WithOne("cartItem")
-                        .HasForeignKey("ECommerce_App.Models.CartItem", "mealId")
+                    b.HasOne("ECommerce_App.Models.Meal", "Meal")
+                        .WithOne("CartItem")
+                        .HasForeignKey("ECommerce_App.Models.CartItem", "MealId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("cart");
+                    b.Navigation("CreateCart");
 
-                    b.Navigation("meal");
+                    b.Navigation("Meal");
                 });
 
             modelBuilder.Entity("ECommerce_App.Models.MealsByCategory", b =>
                 {
-                    b.HasOne("ECommerce_App.Models.Category", "category")
+                    b.HasOne("ECommerce_App.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ECommerce_App.Models.Meal", "meal")
+                    b.HasOne("ECommerce_App.Models.Meal", "Meal")
                         .WithMany()
                         .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("category");
+                    b.Navigation("Category");
 
-                    b.Navigation("meal");
+                    b.Navigation("Meal");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -616,12 +618,12 @@ namespace ECommerce_App.Migrations
 
             modelBuilder.Entity("ECommerce_App.Models.CreateCart", b =>
                 {
-                    b.Navigation("cartItem");
+                    b.Navigation("CartItem");
                 });
 
             modelBuilder.Entity("ECommerce_App.Models.Meal", b =>
                 {
-                    b.Navigation("cartItem");
+                    b.Navigation("CartItem");
                 });
 #pragma warning restore 612, 618
         }

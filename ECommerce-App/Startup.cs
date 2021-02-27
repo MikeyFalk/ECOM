@@ -40,7 +40,7 @@ namespace ECommerce_App
         });
           services.AddTransient<ICategory, CategoryRepository>();
           services.AddTransient<IMeal, MealRepository>();
-          services.AddTransient<ICart, CartRepository>();
+          services.AddTransient<ICart, CreateCartRepository>();
           services.AddTransient<IUserService, IdentityUserService>();
 
       services.AddIdentity<AuthUser, IdentityRole>(options =>

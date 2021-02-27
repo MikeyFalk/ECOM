@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Controllers
 {
-  public class CartController : Controller
+  public class CreateCartController : Controller
   {
     private readonly ICart _cart;
 
 
-    public CartController(ICart cart)
+    public CreateCartController(ICart cart)
     {
       _cart = cart;
     }
@@ -37,14 +37,14 @@ namespace ECommerce_App.Controllers
       return cart;
     }
 
-    [HttpPost]
-    public async Task<ActionResult> AddItemToCart(int mealId, int price, int cartId)
+    [HttpPut("{createCartId}")]
+    public async Task<ActionResult> AddItemToCart(int mealId, int price, int createCartId)
     {
-      await _cart.AddItemToCart(mealId, price, cartId);
+      await _cart.AddItemToCart(mealId, price, createCartId);
       return RedirectToPage("/cart");
     }
 
-    [HttpGet]
+    [HttpGet("{userId}")]
     public async Task<ActionResult<CreateCart>> GetCart(string userId)
     {
        CreateCart Cart = await _cart.GetOne(userId);

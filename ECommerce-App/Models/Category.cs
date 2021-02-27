@@ -9,10 +9,10 @@ namespace ECommerce_App.Models
     public class Category
     {
         [Required]
-        public int id { get; set; }
-        public string name { get; set; }
-        public string mealName { get; set; }
-        public string type { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string MealName { get; set; }
+        public string Type { get; set; }
 
         public List<CartItem> ListOfMeals { get; set; }
 
