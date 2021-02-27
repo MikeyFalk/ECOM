@@ -92,13 +92,15 @@ namespace ECommerce_App.Migrations
                     b.Property<int>("mealId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Categoryid")
+                        .HasColumnType("int");
+
                     b.Property<int>("price")
                         .HasColumnType("int");
 
-                    b.Property<string>("userId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("cartId", "mealId");
+
+                    b.HasIndex("Categoryid");
 
                     b.HasIndex("mealId")
                         .IsUnique();
@@ -514,6 +516,10 @@ namespace ECommerce_App.Migrations
 
             modelBuilder.Entity("ECommerce_App.Models.CartItem", b =>
                 {
+                    b.HasOne("ECommerce_App.Models.Category", null)
+                        .WithMany("ListOfMeals")
+                        .HasForeignKey("Categoryid");
+
                     b.HasOne("ECommerce_App.Models.CreateCart", "cart")
                         .WithMany("cartItem")
                         .HasForeignKey("cartId")
@@ -533,8 +539,8 @@ namespace ECommerce_App.Migrations
 
             modelBuilder.Entity("ECommerce_App.Models.MealsByCategory", b =>
                 {
-                    b.HasOne("ECommerce_App.Models.Category", null)
-                        .WithMany("ListOfMeals")
+                    b.HasOne("ECommerce_App.Models.Category", "category")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -544,6 +550,8 @@ namespace ECommerce_App.Migrations
                         .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("category");
 
                     b.Navigation("meal");
                 });

@@ -9,6 +9,10 @@ namespace ECommerce_App.Models
     {
         public int CategoryId { get; set; }
         public int MealId { get; set; }
+
+        
+        //navigation properties
         public Meal meal { get; set; }
+        public Category category { get; set; }
     }
 }

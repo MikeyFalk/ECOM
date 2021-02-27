@@ -1,5 +1,6 @@
 ﻿using ECommerce_App.Auth.Services.Interfaces;
 using ECommerce_App.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,14 +35,14 @@ namespace ECommerce_App.Models.Services
       return cart;
     }
 
-    public async Task<CartItem> AddItemToCart(int mealId, int price, string userId, int cartId) 
+    public async Task<CartItem> AddItemToCart(int mealId, int price, int cartId) 
     {
       CartItem cartItem = new CartItem()
       {
        
         mealId = mealId,
         price = price,
-        userId = userId,
+       
         cartId = cartId
       };
       _context.Entry(cartItem).State = EntityState.Added;
@@ -59,5 +60,14 @@ namespace ECommerce_App.Models.Services
     {
       throw new NotImplementedException();
     }
-  }
+
+      
+        
+        public async Task<CreateCart> GetOne(string userId)
+        {
+            return await _context.CreateCart
+              // .Include(u => u.userId)
+                .FirstOrDefaultAsync(s => s.userId == userId);
+        }
+    }
 }

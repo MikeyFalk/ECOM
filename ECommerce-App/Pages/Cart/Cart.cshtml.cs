@@ -30,10 +30,11 @@ namespace ECommerce_App.Pages.Cart
             Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
             Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
             Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
+            String UserId = HttpContext.Request.Cookies["userId"];
            
         }
 
-        public void onPost()
+        public void OnPost()
         {
             CookieOptions cookieOptions = new CookieOptions();
             cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ECommerce_App.Migrations
 {
-    public partial class startover14 : Migration
+    public partial class startOver3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -206,11 +206,17 @@ namespace ECommerce_App.Migrations
                     cartId = table.Column<int>(type: "int", nullable: false),
                     mealId = table.Column<int>(type: "int", nullable: false),
                     price = table.Column<int>(type: "int", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Categoryid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CartItem", x => new { x.cartId, x.mealId });
+                    table.ForeignKey(
+                        name: "FK_CartItem_Category_Categoryid",
+                        column: x => x.Categoryid,
+                        principalTable: "Category",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CartItem_CreateCart_cartId",
                         column: x => x.cartId,
@@ -340,6 +346,11 @@ namespace ECommerce_App.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItem_Categoryid",
+                table: "CartItem",
+                column: "Categoryid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItem_mealId",
