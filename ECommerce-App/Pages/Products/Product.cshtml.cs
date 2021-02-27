@@ -7,17 +7,23 @@ using ECommerce_App.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel;
 
-namespace ECommerce_App.Pages.Products
+namespace ECommerce_App.Pages.Products  
 {
+    
     public class ProductModel : PageModel
     {
-    public string id;
+    public IUserService userService { get; set; }
 
+    public string id;
+   
     [BindProperty]
     public Meal Product { get; set; }
     [BindProperty]
     public CartItem CartInput { get; set; }
+    //[BindProperty]
+    //public CreateCart NewCart { get; set; }
 
     private readonly IMeal mealService;
 
@@ -25,33 +31,46 @@ namespace ECommerce_App.Pages.Products
 
     
 
-    public ProductModel(IMeal service, ICart newCartService)
+    public ProductModel(IMeal service, ICart newCartService, IUserService uService)
     {
       mealService = service;
       cartService = newCartService;
+      userService = uService;
       CartInput = new CartItem();
+      
 
     }
     
-    public async Task OnGet(int id, int mealId, int price)
+    public async Task OnGet(int id)
         {
             Product = await mealService.GetMeal(id);
-            //CartInput = await cartService.AddItemToCart(cartId, mealId, price);
+            
+            
+
+            //C = await cartService.GetCart(Id);
         }
 
         public async Task OnPostAsync()
         {
-          CartItem cartItem = new CartItem()
-          {
-                  mealId = CartInput.mealId,                 
-                  price = CartInput.price,
-                  userId = CartInput.userId,
-                  cartId = CartInput.cartId
-
-          };
+            // get user id from cookies
+            // call get cart 
+            var userId = await this.userService.GetUser(this.User);
             
-            CartItem record = await cartService.AddItemToCart( CartInput.mealId, CartInput.price, CartInput.userId, CartInput.cartId);
-     
+            CreateCart cart = await cartService.GetOne(user);
+
+            CartItem cartItem = new CartItem()
+            {
+                mealId = Product.Id,
+                price = Product.price,
+                cartId = cart.Id
+
+            };
+            //in get  cartcontroller to do logic to grab cart by user id (will be a string)
+
+            //then add item cart
+
+            CartItem record = await cartService.AddItemToCart( CartInput.mealId, CartInput.price, CartInput.cart.Id);
+
 
             //CookieOptions cookieoption = new CookieOptions();
             //cookieoption.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));

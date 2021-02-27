@@ -10,27 +10,28 @@
     <ul>
         
         <li>
-            <input asp-for="@Model.Product.ingredients" />
+            Ingredients: @Model.Product.ingredients
+            <input type="hidden" asp-for="@Model.Product.ingredients" />
         </li>
         <li>
-            Price -
-            <input asp-for="@Model.Product.price" />
+            Price: @Model.Product.price
+            <input type ="hidden" asp-for="@Model.Product.price" />
         </li>
 
         <li>
-
-            <input asp-for="@Model.Product.nutrition" />
+            Nutrition: @Model.Product.nutrition
+            <input type = "hidden" asp-for="@Model.Product.nutrition" />
         </li>
         <li>
-            <input asp-for="@Model.Product.type" />
+            Category: @Model.Product.type
+            <input type = "hidden" asp-for="@Model.Product.type" />
         </li>
 
 
     </ul>
     <div>
         <input type="hidden" asp-for="@Model.Product.Id" />
-        <input type="hidden" asp-for="@Model.CartInput.mealId" />       
-        <input type="hidden" asp-for="@Model.CartInput.price" />
+        
 
         <button type="submit">Add to Cart</button>
     </div>

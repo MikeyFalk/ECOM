@@ -38,11 +38,18 @@ namespace ECommerce_App.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> AddItemToCart(int mealId, int price, string userId, int cartId)
+    public async Task<ActionResult> AddItemToCart(int mealId, int price, int cartId)
     {
-      await _cart.AddItemToCart(mealId, price, userId, cartId);
+      await _cart.AddItemToCart(mealId, price, cartId);
       return RedirectToPage("/cart");
     }
 
-  }
+    [HttpGet]
+    public async Task<ActionResult<CreateCart>> GetCart(string userId)
+    {
+       CreateCart Cart = await _cart.GetOne(userId);
+       return Cart;
+    }
+
+    }
 }

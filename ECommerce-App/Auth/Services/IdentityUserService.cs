@@ -34,13 +34,24 @@ namespace ECommerce_App.Auth.Services
       if (result.Succeeded)
       {
         await userManager.AddToRolesAsync(user, data.Roles);
+                List<Claim> claims = new List<Claim>
+                {
+                    new Claim("userId", user.Id)
+
+                };
+                userManager.AddClaimsAsync(user, claims).Wait();
+       
+       await signInManager.PasswordSignInAsync(data.Username, data.Password, true, false);
+
 
         return new UserDTO
         {
           Id = user.Id,
           Username = user.UserName,
-          Roles = await userManager.GetRolesAsync(user)
+          Roles = await userManager.GetRolesAsync(user),
+          
         };
+
       }
       return null;
     }

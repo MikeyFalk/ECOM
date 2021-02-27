@@ -16,6 +16,7 @@ namespace ECommerce_App.Models
         public string nutrition { get; set; }
         public string type { get; set; }
 
+        // navigation property
         public CartItem cartItem { get; set; }
     }
 }

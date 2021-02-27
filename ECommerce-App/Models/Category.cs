@@ -14,7 +14,7 @@ namespace ECommerce_App.Models
         public string mealName { get; set; }
         public string type { get; set; }
 
-        public List<MealsByCategory> ListOfMeals { get; set; }
+        public List<CartItem> ListOfMeals { get; set; }
 
 
     }
