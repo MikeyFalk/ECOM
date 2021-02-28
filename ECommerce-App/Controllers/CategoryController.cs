@@ -48,7 +48,7 @@ namespace ECommerce_App.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCategory(int id, Category category)
         {
-            if (id != category.id)
+            if (id != category.Id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace ECommerce_App.Controllers
 
             await _category.CreateCategory(category);
 
-            return CreatedAtAction("GetCategory", new { id = category.id }, category);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
         // DELETE: api/Hotels/5

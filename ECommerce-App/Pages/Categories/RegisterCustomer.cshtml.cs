@@ -13,16 +13,16 @@ namespace ECommerce_App.Pages
 {
     public class RegisterCustomerModel : PageModel
     {
-    public IUserService userService { get; }
-    public ICart cartService { get; set; }
+    public IUserService UserService { get; }
+    public ICart CartService { get; set; }
     [BindProperty]
     public CustomerModel Input { get; set; }
     [BindProperty]
     public CreateCart CreateCart { get; set; }
     public RegisterCustomerModel(IUserService service, ICart newCartService)
     {
-      userService = service;
-      cartService = newCartService;
+      UserService = service;
+      CartService = newCartService;
     }
      public void OnGet()
      {
@@ -44,13 +44,13 @@ namespace ECommerce_App.Pages
         Roles = new List<string>() { "guest" }
     };
       
-      var newUsers = await userService.Register(registerDTO);
+      var newUsers = await UserService.Register(registerDTO);
       CreateCart cart = new CreateCart
       {
-                userId = newUsers.Id
+                UserId = newUsers.Id
       };
 
-     await cartService.Create(cart);
+     await CartService.Create(cart);
      return RedirectToPage("/Categories/Index");
     }
     public class CustomerModel
@@ -62,7 +62,7 @@ namespace ECommerce_App.Pages
       public string UserId { get; set; }
       
       public IList<string> Roles { get; set; } 
-      public CreateCart cart { get; set; }
+      public CreateCart CreateCart { get; set; }
     }
 
    

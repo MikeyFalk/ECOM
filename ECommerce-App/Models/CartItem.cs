@@ -8,15 +8,15 @@ namespace ECommerce_App.Models
 {
   public class CartItem 
   {
-   public int cartId { get; set; }
+   public int CreateCartId { get; set; }
     
-   public int mealId { get; set; }
-   public int price { get; set; }
+   public int MealId { get; set; }
+   public int Price { get; set; }
     
     
      //navigation properties   
-    public CreateCart cart { get; set; }
+    public CreateCart CreateCart { get; set; }
 
-    public Meal meal { get; set; }
+    public Meal Meal { get; set; }
   }
 }

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ECommerce_App.Models.Services
 {
-  public class CartRepository : ICart
+  public class CreateCartRepository : ICart
   {
 
     private readonly MjDbContext _context;
 
-    public CartRepository(MjDbContext context)
+    public CreateCartRepository(MjDbContext context)
     {
       _context = context;
     }
@@ -22,7 +22,7 @@ namespace ECommerce_App.Models.Services
     {
       CreateCart newCart = new CreateCart()
       {
-        userId = cart.userId
+        UserId = cart.UserId
       };
 
       _context.Entry(newCart).State = EntityState.Added;
@@ -35,15 +35,16 @@ namespace ECommerce_App.Models.Services
       return cart;
     }
 
-    public async Task<CartItem> AddItemToCart(int mealId, int price, int cartId) 
+    public async Task<CartItem> AddItemToCart(int mealId, int price, int createCartId) 
     {
       CartItem cartItem = new CartItem()
       {
        
-        mealId = mealId,
-        price = price,
+        MealId = mealId,
+        Price = price,
+        CreateCartId = createCartId
        
-        cartId = cartId
+        
       };
       _context.Entry(cartItem).State = EntityState.Added;
       await _context.SaveChangesAsync();
@@ -67,7 +68,7 @@ namespace ECommerce_App.Models.Services
         {
             return await _context.CreateCart
               // .Include(u => u.userId)
-                .FirstOrDefaultAsync(s => s.userId == userId);
+                .FirstOrDefaultAsync(s => s.UserId == userId);
         }
     }
 }

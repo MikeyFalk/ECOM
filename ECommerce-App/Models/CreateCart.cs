@@ -10,12 +10,12 @@ namespace ECommerce_App.Models
 {
   public class CreateCart
   {
-    [Required]
+    
     public int Id { get; set; }
-    public int price { get; set; }
-    public int quantity { get; set; }
-    public string userId { get; set; }
-    public List<CartItem> cartItem { get; set; }
+    public int Price { get; set; }
+    public int Quantity { get; set; }
+    public string UserId { get; set; }
+    public List<CartItem> CartItem { get; set; }
 
   }
 }
