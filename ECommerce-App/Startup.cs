@@ -35,8 +35,9 @@ namespace ECommerce_App
 
       services.AddDbContext<MjDbContext>(options =>
         {
-          string connectionString = Configuration.GetConnectionString("DefaultConnection");
-          options.UseSqlServer(connectionString);
+          string connectionString = Configuration.GetConnectionString("ProductionConnection");
+          // options.UseSqlServer(Configuration["ProductionConnection"]);
+          options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
         });
           services.AddTransient<ICategory, CategoryRepository>();
           services.AddTransient<IMeal, MealRepository>();
