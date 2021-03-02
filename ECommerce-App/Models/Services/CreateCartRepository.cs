@@ -42,8 +42,7 @@ namespace ECommerce_App.Models.Services
        
         MealId = mealId,
         Price = price,
-        CreateCartId = createCartId
-       
+        CreateCartId = createCartId,
         
       };
       _context.Entry(cartItem).State = EntityState.Added;
@@ -67,7 +66,6 @@ namespace ECommerce_App.Models.Services
         public async Task<CreateCart> GetOne(string userId)
         {
             return await _context.CreateCart
-              // .Include(u => u.userId)
                 .FirstOrDefaultAsync(s => s.UserId == userId);
         }
     }
