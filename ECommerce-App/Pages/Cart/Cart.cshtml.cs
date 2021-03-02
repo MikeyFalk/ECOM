@@ -23,15 +23,30 @@ namespace ECommerce_App.Pages.Cart
         [BindProperty]
         public int Quantity { get; set; }
 
-   
-        public void OnGet()
+        private readonly ICart cartService;
+        private readonly IMeal mealService;
+        public CartItem checkoutCart { get; set; }
+
+    public CartModel(ICart newCartService, IMeal newMealService)
+    {
+      cartService = newCartService;
+      mealService = newMealService;
+      checkoutCart = new CartItem();
+    }
+    public async Task OnGet()
         {
-            Name = HttpContext.Request.Cookies["Name"];
-            Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
-            Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
-            Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
-            String UserId = HttpContext.Request.Cookies["userId"];
-           
+            var UserId = HttpContext.Request.Cookies["userId"];
+
+            Product = await cartService.GetCartItems(UserId);
+         
+            //CartItem cartItem = new CartItem()
+            //{
+            //  MealId = checkoutCart.MealId,
+            //  Price = checkoutCart.Price,
+            //};
+
+            // CartItem record = await cartService.AddItemToCart(cartItem.MealId, cartItem.Price, cartItem.CreateCartId);
+          
         }
 
         public void OnPost()
@@ -46,3 +61,9 @@ namespace ECommerce_App.Pages.Cart
         }
     }
 }
+
+            //Name = HttpContext.Request.Cookies["Name"];
+            //Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
+            //Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
+            //Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
+            //String UserId = HttpContext.Request.Cookies["userId"];

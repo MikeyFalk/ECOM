@@ -44,16 +44,10 @@ namespace ECommerce_App.Pages.Products
     public async Task OnGet(int id)
         {
             Product = await mealService.GetMeal(id);
-            
-            
-
-            //C = await cartService.GetCart(Id);
         }
 
         public async Task OnPostAsync()
         {
-
-      //var userId = await this.userService.GetUser(this.User);
 
           var UserId = HttpContext.Request.Cookies["userId"];
 
@@ -63,10 +57,7 @@ namespace ECommerce_App.Pages.Products
                 {
                     MealId = Product.Id,
                     Price = Product.Price,
-                 //   UserId = cart.UserId,
                     CreateCartId = cart.Id
-                                   // .Where(UserId = UserId)
-                   
                 };
             
             CartItem record = await cartService.AddItemToCart( cartItem.MealId, cartItem.Price, cartItem.CreateCartId);
