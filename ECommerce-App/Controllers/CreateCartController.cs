@@ -31,9 +31,9 @@ namespace ECommerce_App.Controllers
       }
 
     [HttpGet]
-    public async Task<ActionResult<List<CartItem>>> GetCartItems(string UserId, int CreateCartId)
+    public async Task<ActionResult<List<CartItem>>> GetCartItems(int CreateCartId)
     {
-      return await _cart.GetCartItems(UserId, CreateCartId);
+      return await _cart.GetCartItems(CreateCartId);
     }
 
     [HttpPut("{createCartId}")]

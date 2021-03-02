@@ -33,12 +33,26 @@ namespace ECommerce_App.Pages.Cart
       mealService = newMealService;
       checkoutCart = new CartItem();
     }
-    public async Task OnGet()
+    public async Task OnGet(string userId)
         {
-            var UserId = HttpContext.Request.Cookies["userId"];
+            String UserId = HttpContext.Request.Cookies["userId"];
 
-            Product = await cartService.GetCartItems(UserId);
-         
+            CreateCart cart = await cartService.GetOne(UserId);
+
+            CartItem cartItem = new CartItem()
+            {
+                CreateCartId = cart.Id
+            
+            };
+
+            //CartItem checkOutCart = await cartService.GetCartItems(cartItem.CreateCartId);
+
+
+
+
+
+            // Product = await cartService.GetCartItems(UserId);
+
             //CartItem cartItem = new CartItem()
             //{
             //  MealId = checkoutCart.MealId,
@@ -46,7 +60,7 @@ namespace ECommerce_App.Pages.Cart
             //};
 
             // CartItem record = await cartService.AddItemToCart(cartItem.MealId, cartItem.Price, cartItem.CreateCartId);
-          
+
         }
 
         public void OnPost()
