@@ -52,26 +52,23 @@ namespace ECommerce_App.Pages.Products
 
         public async Task OnPostAsync()
         {
-            // get user id from cookies
-            // call get cart 
 
-            //var userId = await this.userService.GetUser(this.User);
+      //var userId = await this.userService.GetUser(this.User);
+
+          var UserId = HttpContext.Request.Cookies["userId"];
+
+          CreateCart cart = await cartService.GetOne(UserId);
+
+          CartItem cartItem = new CartItem()
+                {
+                    MealId = Product.Id,
+                    Price = Product.Price,
+                 //   UserId = cart.UserId,
+                    CreateCartId = cart.Id
+                                   // .Where(UserId = UserId)
+                   
+                };
             
-            //var UserId = HttpContext.Request.Cookies["userId"];
-
-            //CreateCart cart = await cartService.GetOne(user);
-
-            CartItem cartItem = new CartItem()
-            {
-                MealId = Product.Id,
-                Price = Product.Price,
-                
-
-            };
-            //in get  cartcontroller to do logic to grab cart by user id (will be a string)
-
-            //then add item cart
-
             CartItem record = await cartService.AddItemToCart( cartItem.MealId, cartItem.Price, cartItem.CreateCartId);
 
 

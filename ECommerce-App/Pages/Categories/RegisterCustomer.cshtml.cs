@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ECommerce_App.Auth.Models.DTO;
 using ECommerce_App.Auth.Services.Interfaces;
 using ECommerce_App.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -49,6 +50,9 @@ namespace ECommerce_App.Pages
       {
                 UserId = newUsers.Id
       };
+      CookieOptions cookieoption = new CookieOptions();
+      cookieoption.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
+      HttpContext.Response.Cookies.Append("UserId", newUsers.Id, cookieoption);
 
      await CartService.Create(cart);
      return RedirectToPage("/Categories/Index");
