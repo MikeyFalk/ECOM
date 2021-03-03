@@ -29,19 +29,36 @@ namespace ECommerce_App.Models.Services
       await _context.SaveChangesAsync();
       return newCart;
     }
-    public async Task<List<CartItem>> GetCartItems(int CreateCartId)
+    public async Task<List<int>> GetCartItems(string userId)
     {
-           // return await _context.CreateCart
+            // return await _context.CreateCart
             //                  .Include(c => c.CartItem)
-             //                 .Where(a => a.Id == CreateCartId)
-                              
+            //                 .Where(a => a.Id == CreateCartId)
 
-          //                 .Where(c => c.Id == CreateCartId)
-               //         .ToListAsync();
+
+            //                 .Where(c => c.Id == CreateCartId)
+            //         .ToListAsync();
+
+
+
+            /// In SQL this would be 
+            /// SELECT * 
+            /// FROM CartItem 
+            /// INNERJOIN  
+            /// CreateCart on CreatecartId = CartItem.CreateCartId; 
+            ///
+             return await (from c in _context.CartItem
+                          join i in _context.CreateCart on c.CreateCartId equals i.Id select  c.MealId).ToListAsync();
+            
+            
+            //return await  result = (from a in context.CartItem
+            //              Where a.CreateCartId == CreateCart.Id
+            //        .ToList();
+
 
     
                //ToListAsync(s=> s.Id == CreateCartId);
-            return null;
+            
       
     }
 
