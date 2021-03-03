@@ -31,16 +31,9 @@ namespace ECommerce_App.Models.Services
     }
     public async Task<List<int>> GetCartItems(string userId)
     {
-      return await _context.CreateCart
-                        .Include(c => c.CartItem)
-                        .Where(a => a.Id == CreateCartId)
-
-
-                     .Where(c => c.Id == CreateCartId)
-                  .ToListAsync();
-
-
-      ToListAsync(s => s.Id == CreateCartId);
+      return await (from c in _context.CartItem
+                    join i in _context.CreateCart on c.CreateCartId equals i.Id
+                    select c.MealId).ToListAsync();
      
     }
 
