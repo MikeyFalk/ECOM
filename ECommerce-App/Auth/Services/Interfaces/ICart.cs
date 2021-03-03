@@ -11,7 +11,7 @@ namespace ECommerce_App.Auth.Services.Interfaces
     Task<CreateCart> Create(CreateCart cart);
     Task<CartItem> AddItemToCart(int mealId, int price, int createCartId);
 
-    Task<List<CartItem>> GetCartItems(int CreateCartId);
+    Task<List<int>> GetCartItems(string userId);
     Task<CreateCart> UpdateQuantity(CreateCart cart);
     Task DeleteFromCart(int id);
 
