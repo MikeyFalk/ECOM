@@ -54,7 +54,7 @@ namespace ECommerce_App.Pages.Cart
 
             foreach ( var product in Checkout)
             {
-                product
+                product = checkoutCart.MealId;
 
             }
 
