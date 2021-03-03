@@ -31,18 +31,17 @@ namespace ECommerce_App.Models.Services
     }
     public async Task<List<CartItem>> GetCartItems(int CreateCartId)
     {
-           // return await _context.CreateCart
-            //                  .Include(c => c.CartItem)
-             //                 .Where(a => a.Id == CreateCartId)
-                              
+      return await _context.CreateCart
+                        .Include(c => c.CartItem)
+                        .Where(a => a.Id == CreateCartId)
 
-          //                 .Where(c => c.Id == CreateCartId)
-               //         .ToListAsync();
 
-    
-               //ToListAsync(s=> s.Id == CreateCartId);
-            return null;
-      
+                     .Where(c => c.Id == CreateCartId)
+                  .ToListAsync();
+
+
+      ToListAsync(s => s.Id == CreateCartId);
+     
     }
 
     public async Task<CartItem> AddItemToCart(int mealId, int price, int createCartId) 
