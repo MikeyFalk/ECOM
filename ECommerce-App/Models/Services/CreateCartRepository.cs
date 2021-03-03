@@ -29,7 +29,7 @@ namespace ECommerce_App.Models.Services
       await _context.SaveChangesAsync();
       return newCart;
     }
-    public async Task<List<CartItem>> GetCartItems(int CreateCartId)
+    public async Task<List<int>> GetCartItems(string userId)
     {
       return await _context.CreateCart
                         .Include(c => c.CartItem)

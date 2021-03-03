@@ -26,29 +26,41 @@ namespace ECommerce_App.Pages.Cart
         private readonly ICart cartService;
         private readonly IMeal mealService;
         public CartItem checkoutCart { get; set; }
+        public List<int> Checkout { get; set; }
 
     public CartModel(ICart newCartService, IMeal newMealService)
     {
       cartService = newCartService;
       mealService = newMealService;
       checkoutCart = new CartItem();
+       
     }
     public async Task OnGet(string userId)
         {
             String UserId = HttpContext.Request.Cookies["userId"];
 
-            CreateCart cart = await cartService.GetOne(UserId);
+            //CreateCart cart = await cartService.GetOne(UserId);
 
-            CartItem cartItem = new CartItem()
-            {
-                CreateCartId = cart.Id
-            
-            };
+           // CartItem cartItem = new CartItem()
+           // {
+            //  Cr = cart.Id
+
+//            };
 
             //CartItem checkOutCart = await cartService.GetCartItems(cartItem.CreateCartId);
 
 
+            Checkout = await cartService.GetCartItems(userId);
 
+            foreach ( var product in Checkout)
+            {
+                product
+
+            }
+
+            
+            
+            Product = await mealService.GetMeal(Checkout);
 
 
             // Product = await cartService.GetCartItems(UserId);
