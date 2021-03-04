@@ -8,24 +8,25 @@
     <h2>@Model.Product.Name</h2>
     <input type="hidden" asp-for="@Model.Product.Name"/>
     <ul>
-        
+
         <li>
             Ingredients: @Model.Product.Ingredients
             <input type="hidden" asp-for="@Model.Product.Ingredients" />
         </li>
         <li>
             Price: @Model.Product.Price
-            <input type ="hidden" asp-for="@Model.Product.Price" />
+            <input type="hidden" asp-for="@Model.Product.Price" />
         </li>
 
         <li>
             Nutrition: @Model.Product.Nutrition
-            <input type = "hidden" asp-for="@Model.Product.Nutrition" />
+            <input type="hidden" asp-for="@Model.Product.Nutrition" />
         </li>
         <li>
             Category: @Model.Product.Type
-            <input type = "hidden" asp-for="@Model.Product.Type" />
+            <input type="hidden" asp-for="@Model.Product.Type" />
         </li>
+      
 
 
     </ul>

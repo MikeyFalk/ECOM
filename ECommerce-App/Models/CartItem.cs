@@ -12,6 +12,7 @@ namespace ECommerce_App.Models
     
    public int MealId { get; set; }
    public int Price { get; set; }
+   public int Quantity { get; set; }
     public CreateCart CreateCart { get; set; }
 
     public Meal Meal { get; set; }

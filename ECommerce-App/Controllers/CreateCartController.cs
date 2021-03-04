@@ -31,15 +31,15 @@ namespace ECommerce_App.Controllers
       }
 
     [HttpGet]
-    public async Task<ActionResult<List<int>>> GetCartItems(string userId)
+    public async Task<ActionResult<List<CartItem>>> GetCartItems(string userId)
     {
       return await _cart.GetCartItems(userId);
     }
 
     [HttpPut("{createCartId}")]
-    public async Task<ActionResult> AddItemToCart(int mealId, int price, int createCartId)
+    public async Task<ActionResult> AddItemToCart(int mealId, int price, int quantity, int createCartId)
     {
-      await _cart.AddItemToCart(mealId, price, createCartId);
+      await _cart.AddItemToCart(mealId, price, quantity, createCartId);
       return RedirectToPage("/cart");
     }
 
