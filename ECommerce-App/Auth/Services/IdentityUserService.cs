@@ -21,7 +21,11 @@ namespace ECommerce_App.Auth.Services
       userManager = manager;
       signInManager = sim;
     } 
-
+     /// <summary>
+     /// Creates a new user, to be saved into the db that can later be extracted by id
+     /// </summary>
+     /// <param name="data"></param>
+     /// <returns>A new user</returns>
     public async Task<UserDTO> Register(RegisterDTO data)
     {
       var user = new AuthUser
@@ -59,7 +63,12 @@ namespace ECommerce_App.Auth.Services
     {
       throw new NotImplementedException();
     }
-
+    /// <summary>
+    /// Authenticate the user by matching the correct username and password that is saved into the db
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
+    /// <returns>Successful login if the correct input is made </returns>
     public async Task<UserDTO> Authenticate(string username, string password)
     {
       var result = await signInManager.PasswordSignInAsync(username, password, true, false);
@@ -75,7 +84,11 @@ namespace ECommerce_App.Auth.Services
       }
       return null;
     }
-
+    /// <summary>
+    /// Gets the user with claims principal, although we did not end up utilizing much of this we wanted to try and branch out. 
+    /// </summary>
+    /// <param name="principal"></param>
+    /// <returns></returns>
     public async Task<UserDTO> GetUser(ClaimsPrincipal principal)
     {
       var user = await userManager.GetUserAsync(principal);

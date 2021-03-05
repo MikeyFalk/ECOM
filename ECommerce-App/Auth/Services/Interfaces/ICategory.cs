@@ -15,8 +15,5 @@ namespace ECommerce_App.Auth.Services.Interfaces
         Task<List<Category>> GetCategories();
         Task<Category> UpdateCategory(Category category);
         Task DeleteCategory(int id);
-        
-        /// Need to set up a join table to be able to add meals to category.
-        ///Task AddMealToCategory(int id, string name, string mealname, string type);
     }
 }

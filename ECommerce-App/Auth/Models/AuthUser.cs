@@ -8,6 +8,6 @@ namespace ECommerce_App.Auth.Models
 {
   public class AuthUser : IdentityUser
   {
-        //public IList<string> Roles { get; set; } = new string[3];
-    }
+   
+  }
 }
