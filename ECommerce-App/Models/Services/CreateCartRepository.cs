@@ -29,21 +29,25 @@ namespace ECommerce_App.Models.Services
       await _context.SaveChangesAsync();
       return newCart;
     }
-    public async Task<List<int>> GetCartItems(string userId)
+    public async Task<List<CartItem>> GetCartItems(string userId)
     {
-      return await (from c in _context.CartItem
-                    join i in _context.CreateCart on c.CreateCartId equals i.Id
-                    select c.MealId).ToListAsync();
-     
+           var checkOut = await _context.CreateCart
+                    .Where(s => s.UserId == userId)
+                   .Include(d => d.CartItem)
+                   .ThenInclude(m => m.Meal)
+                   .FirstOrDefaultAsync();
+            return (checkOut.CartItem);            
+      
     }
 
-    public async Task<CartItem> AddItemToCart(int mealId, int price, int createCartId) 
+    public async Task<CartItem> AddItemToCart(int mealId, int price, int quantity, int createCartId) 
     {
       CartItem cartItem = new CartItem()
       {
        
         MealId = mealId,
         Price = price,
+        Quantity = quantity,
         CreateCartId = createCartId,
         
       };

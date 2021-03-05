@@ -13,7 +13,7 @@ namespace ECommerce_App.Pages.Cart
 {
     public class CartModel : PageModel
     {   [BindProperty]
-        public ProductModel Product { get; set; }
+        public CartModel Cart { get; set; }
         [BindProperty]
         public string Name { get; set; }
         [BindProperty]
@@ -25,54 +25,22 @@ namespace ECommerce_App.Pages.Cart
 
         private readonly ICart cartService;
         private readonly IMeal mealService;
-        public CartItem checkoutCart { get; set; }
-        public List<int> Checkout { get; set; }
+        [BindProperty]
+        public CartItem CheckoutCart { get; set; }
+        [BindProperty]
+        public List<CartItem> Checkout { get; set; }
 
     public CartModel(ICart newCartService, IMeal newMealService)
     {
       cartService = newCartService;
       mealService = newMealService;
-      checkoutCart = new CartItem();
+      CheckoutCart = new CartItem();
        
     }
-    public async Task OnGet(string userId)
+    public async Task OnGet()
         {
-            String UserId = HttpContext.Request.Cookies["userId"];
-
-            //CreateCart cart = await cartService.GetOne(UserId);
-
-           // CartItem cartItem = new CartItem()
-           // {
-            //  Cr = cart.Id
-
-//            };
-
-            //CartItem checkOutCart = await cartService.GetCartItems(cartItem.CreateCartId);
-
-
-            Checkout = await cartService.GetCartItems(userId);
-
-            foreach ( var product in Checkout)
-            {
-                product = checkoutCart.MealId;
-
-            }
-
-            
-            
-            Product = await mealService.GetMeal(Checkout);
-
-
-            // Product = await cartService.GetCartItems(UserId);
-
-            //CartItem cartItem = new CartItem()
-            //{
-            //  MealId = checkoutCart.MealId,
-            //  Price = checkoutCart.Price,
-            //};
-
-            // CartItem record = await cartService.AddItemToCart(cartItem.MealId, cartItem.Price, cartItem.CreateCartId);
-
+            String UserId = HttpContext.Request.Cookies["UserId"];  
+            Checkout = await cartService.GetCartItems(UserId); 
         }
 
         public void OnPost()

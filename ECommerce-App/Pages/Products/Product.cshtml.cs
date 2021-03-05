@@ -57,11 +57,12 @@ namespace ECommerce_App.Pages.Products
                 {
                     MealId = Product.Id,
                     Price = Product.Price,
+                    Quantity = cart.Quantity, 
                     CreateCartId = cart.Id
                 };
             
-            CartItem record = await cartService.AddItemToCart( cartItem.MealId, cartItem.Price, cartItem.CreateCartId);
-
+            CartItem record = await cartService.AddItemToCart( cartItem.MealId, cartItem.Price, cartItem.Quantity, cartItem.CreateCartId);
+            
 
             //CookieOptions cookieoption = new CookieOptions();
             //cookieoption.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));

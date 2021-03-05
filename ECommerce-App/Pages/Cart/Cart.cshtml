@@ -3,25 +3,30 @@
 @{
 }
 
-<h1>Hello, here is your cart</h1> 
-
+<h1>Hello, here is your cart</h1>
 <form method="post">
-    <div>
-        <label asp-for="@Model.Name"> Product : @Model.Name</label>
-    </div>
-    <div>
-        <label asp-for="@Model.Price"> Price : @Model.Price </label>
-    </div>
-    <div>
-        <input type="hidden" asp-for="@Model.Id"> 
-    </div>
-    <div>
-        <input asp-for="@Model.Quantity" />
-    </div>
-    <div>
-      <input type="Submit" title="Pay Now"/>
-    </div>
+    @if (Model.Checkout != null)
+    {
+        @foreach (var item in Model.Checkout)
+        {
 
+            <div>
+                <label asp-for="@item.Meal.Name"> Product : @item.Meal.Name</label>
+            </div>
+            <div>
+                <label asp-for="@item.Meal.Price"> Price : @item.Meal.Price </label>
+            </div>
+            <div>
+                <input type="hidden" asp-for="@item.Meal.Id">
+                <input type="hidden" asp-for="@item.CreateCart.Id">
+            </div>
+            <div>
+                <input type="Submit" title="Pay Now" />
+            </div>
+        }
+    }
 
-
+    <div>
+        <input type="Submit" title="Pay Now" />
+    </div>
 </form>
