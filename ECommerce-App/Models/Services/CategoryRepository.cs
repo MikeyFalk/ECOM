@@ -17,22 +17,11 @@ namespace ECommerce_App.Models.Services
             _context = context;
         }
 
-        //public async Task AddCategory(int id, string name, string mealname, string type)
-        //{
-        //    Category category = new Category
-        //    {
-        //        id = id,
-        //        name = name,
-        //        mealName = mealname,
-        //        type = type
-
-        //    };
-
-        //    _context.Entry(category).State = EntityState.Added;
-        //    await _context.SaveChangesAsync();
-
-        //}
-
+        /// <summary>
+        /// Async method to create a category, that is used from the controller 
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns>a new category on the categories page</returns>
         public async Task<Category> CreateCategory(Category category)
         {
             _context.Entry(category).State = EntityState.Added;

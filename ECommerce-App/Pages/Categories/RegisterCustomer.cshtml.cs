@@ -28,7 +28,10 @@ namespace ECommerce_App.Pages
      public void OnGet()
      {
      }
-
+    /// <summary>
+    /// Ensures that upon getting to the register page, the correct fields are attached and then saved to the database to be later called on to login.
+    /// </summary>
+    /// <returns>A new user that gets posted to the db </returns>
     public async Task<IActionResult> OnPostAsync()
     {
       if(!ModelState.IsValid)
@@ -72,26 +75,4 @@ namespace ECommerce_App.Pages
    
     }
 }
-    //foreach (var error in result.Errors)
-    //{
-    //  var errorKey =
-    //    error.Code.Contains("Password") ? nameof(data.Password) :
-    //    error.Code.Contains("Email") ? nameof(data.Email) :
-    //    error.Code.Contains("Username") ? nameof(data.Username) :
-    //    "";
-    //  modelState.AddModelError(errorKey, error.Description);
-    //}
-
-
-
-
-
-//Customer customer = new User()
-//{
-//  Name = Input.Username,
-//  Email = Input.Email,
-//  Password = Input.Password,
-//  Phonenumber = Input.Phonenumber
-
-//};
-//User record = await userService.Create(user);
+   

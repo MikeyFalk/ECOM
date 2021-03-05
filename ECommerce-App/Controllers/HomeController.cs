@@ -12,16 +12,7 @@ namespace ECommerce_App.Controllers
     {
         public IActionResult Index()
         {
-            /*if (zip != null)
-
-            {
-                CookieOptions cookieOptions = new CookieOptions();
-                cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
-               HttpContext.Response.Cookies.Append("zipCode", zip, cookieOptions);
-            }
-            */
             return View();
-
         }
         public IActionResult Weather()
         {
@@ -29,13 +20,12 @@ namespace ECommerce_App.Controllers
             ViewData["zip"] = zip;
             return View();
         }
-
-
-        //public void SetCookie(string key, string value, int? expireTime)
-        //{
-         //   CookieOptions option = new CookieOptions();
-        //}
-
+       /// <summary>
+       /// Method were a new category is created and placed onto the categories page
+       /// </summary>
+       /// <param name="name"></param>
+       /// <param name="type"></param>
+       /// <returns></returns>
        public IActionResult Category(string name, string type)
         {
             Category category = new Category()
@@ -46,6 +36,12 @@ namespace ECommerce_App.Controllers
 
             return View(category);
         }
+        /// <summary>
+        /// Creates a new list of Categories by name and type, which will be displayed onto our categories page
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <returns>Categories page</returns>
         public IActionResult Categories(string name, string type)
         {
             
@@ -60,7 +56,15 @@ namespace ECommerce_App.Controllers
             };
             return View(categories);
         }
-
+        /// <summary>
+        /// Seeded data to create meals that would fall into our 'products' page
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="price"></param>
+        /// <param name="Ingredients"></param>
+        /// <param name="Nutrition"></param>
+        /// <param name="type"></param>
+        /// <returns>Items users can purchase</returns>
         public IActionResult Meal(string name, int price, string Ingredients, string Nutrition, string type)
 
         {
@@ -81,10 +85,7 @@ namespace ECommerce_App.Controllers
         }
         public IActionResult MealsByCategory()
         {
-      //List<MealsByCategory> mealsByCategory = new List<MealsByCategory>()
-            //{
-            //    new MealsByCategory(){mealName = "Vegan Chili"}
-            //};
+ 
       return View();
         }
 

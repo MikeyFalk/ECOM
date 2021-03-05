@@ -53,15 +53,6 @@ namespace ECommerce_App.Controllers
       {
         return BadRequest();
       }
-       
-       //Meal meal = new Meal()
-       //  {
-       //      id = id,
-       //  };     
-
-           
-
-            //return View(meal);
 
       var upDatedMeal = await _meal.UpdateMeal(meal);
 
@@ -90,8 +81,8 @@ namespace ECommerce_App.Controllers
       await _meal.CreateMeal(meal);
       if(!ModelState.IsValid)
       {
-                //return RedirectToAction("Meal", new { id = meal.id }, meal);
-                return RedirectToAction("Meal/CreateMeal");
+                
+      return RedirectToAction("Meal/CreateMeal");
       }
       return View();
     }

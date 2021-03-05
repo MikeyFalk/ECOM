@@ -75,10 +75,8 @@ namespace ECommerce_App.Controllers
             data.Roles = new List<string>() { "guest" };
 
             var user = await userService.Register(data);
-            //if (ModelState.IsValid)
-            //{
-            //    return Redirect("/login");
-            //}
+        
+            
             return Redirect("/login/welcome");
         }
 
@@ -121,10 +119,6 @@ namespace ECommerce_App.Controllers
     }
     public IActionResult MealsByCategory()
     {
-      //List<MealsByCategory> mealsByCategory = new List<MealsByCategory>()
-      //      {
-      //          new MealsByCategory(){mealName = "Vegan Chili"}
-      //      };
       return View();
     }
 
