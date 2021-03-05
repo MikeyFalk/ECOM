@@ -29,6 +29,11 @@ namespace ECommerce_App.Models.Services
       await _context.SaveChangesAsync();
       return newCart;
     }
+    /// <summary>
+    /// linq statement to pull the user id, to be able to pull down the cart (created when user is created)
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns>Cart items associated with the users cart that was created</returns>
     public async Task<List<CartItem>> GetCartItems(string userId)
     {
            var checkOut = await _context.CreateCart
@@ -68,7 +73,11 @@ namespace ECommerce_App.Models.Services
     }
 
       
-        
+        /// <summary>
+        /// Gets ONE specific cart, in this case the one that is attached to the userId.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>One specific cart by id</returns>
         public async Task<CreateCart> GetOne(string userId)
         {
             return await _context.CreateCart

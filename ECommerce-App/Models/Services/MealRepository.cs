@@ -22,24 +22,6 @@ namespace ECommerce_App.Models.Services
             throw new NotImplementedException();
         }
 
-        //public async Task<Meal> AddMeal(Meal meal)
-        //{
-        //    Meal meal = new Meal
-        //    {
-        //        id = id,
-        //        name = name,
-        //        price = price,
-        //        ingredients = ingredients,
-        //        nutrition = nutrition,
-        //        type = type
-
-        //    };
-
-        //    _context.Entry(meal).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-        //    await _context.SaveChangesAsync();
-
-        //}
-
         public async Task<Meal> CreateMeal(Meal meal)
         {
            _context.Entry(meal).State = EntityState.Added;

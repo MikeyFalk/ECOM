@@ -23,6 +23,7 @@ namespace ECommerce_App.Pages.Cart
         [BindProperty]
         public int Quantity { get; set; }
 
+        // navigation properties to our models and interfaces below
         private readonly ICart cartService;
         private readonly IMeal mealService;
         [BindProperty]
@@ -37,12 +38,18 @@ namespace ECommerce_App.Pages.Cart
       CheckoutCart = new CartItem();
        
     }
+    /// <summary>
+    /// Our on get method here will grab the user id that is stored in the cookies
+    /// </summary>
+    /// <returns>the cart items that are associated with the user's cart </returns>
     public async Task OnGet()
         {
             String UserId = HttpContext.Request.Cookies["UserId"];  
             Checkout = await cartService.GetCartItems(UserId); 
         }
-
+    /// <summary>
+    /// On post method takes care of setting cookies for new users that register
+    /// </summary>
         public void OnPost()
         {
             CookieOptions cookieOptions = new CookieOptions();
@@ -56,8 +63,4 @@ namespace ECommerce_App.Pages.Cart
     }
 }
 
-            //Name = HttpContext.Request.Cookies["Name"];
-            //Price = Convert.ToInt32(HttpContext.Request.Cookies["Price"]);
-            //Id = Convert.ToInt32(HttpContext.Request.Cookies["Id"]);
-            //Quantity = Convert.ToInt32(HttpContext.Request.Cookies["Quantity"]);
-            //String UserId = HttpContext.Request.Cookies["userId"];
+           

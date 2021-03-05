@@ -14,7 +14,7 @@ namespace ECommerce_App.Controllers
     {
         private readonly ICategory _category;
 
-
+        // sets up reference to our db 
         public CategoryController(ICategory category)
         {
             _category = category;
@@ -23,7 +23,10 @@ namespace ECommerce_App.Controllers
         //{
         //    return View();
         //}
-
+        /// <summary>
+        /// Gets all categories available from the db 
+        /// </summary>
+        /// <returns>Categories</returns>
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
@@ -31,7 +34,11 @@ namespace ECommerce_App.Controllers
             return Ok(await _category.GetCategories());
         }
 
-        // GET: api/Hotels/5
+        /// <summary>
+        /// Pulls one specific id from the db 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The category that matches the id inputted</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
@@ -41,9 +48,12 @@ namespace ECommerce_App.Controllers
             return category;
         }
 
-        // PUT: api/Hotels/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// With the correct permissions, you are allowed to update a category that is within the db 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="category"></param>
+        /// <returns>Update by id that matches the category the admin/editor would like to update</returns>
         [Authorize(Roles = "editor")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCategory(int id, Category category)
@@ -58,9 +68,11 @@ namespace ECommerce_App.Controllers
             return Ok(upDatedCategory);
         }
 
-        // POST: api/Hotels
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Below we can create a new category, with the authorized role. 
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns>A new category</returns>
         // [Authorize(Roles = "administrator")]
         [HttpPost]
         public async Task<ActionResult<Category>> CreateCategory(Category category)
@@ -71,7 +83,7 @@ namespace ECommerce_App.Controllers
             return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
-        // DELETE: api/Hotels/5
+       
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Category>> DeleteCategory(int id)

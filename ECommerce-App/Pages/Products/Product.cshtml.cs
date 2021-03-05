@@ -22,9 +22,7 @@ namespace ECommerce_App.Pages.Products
     public Meal Product { get; set; }
     [BindProperty]
     public CartItem CartInput { get; set; }
-    //[BindProperty]
-    //public CreateCart NewCart { get; set; }
-
+    
     private readonly IMeal mealService;
 
     private readonly ICart cartService;
@@ -37,15 +35,21 @@ namespace ECommerce_App.Pages.Products
       cartService = newCartService;
       UserService = uService;
       CartInput = new CartItem();
-      
-
     }
     
+    /// <summary>
+    /// On get, we are grabbing the specific product id to be displayed
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>product that the user selected</returns>
     public async Task OnGet(int id)
         {
             Product = await mealService.GetMeal(id);
         }
-
+        /// <summary>
+        /// This was one trickier, but on post we attach the user id to the cart. So when a new user is created, so is a cart and by doing so when a user clicks on add to cart, it attaches to the specific ids.
+        /// </summary>
+        /// <returns>Item in cart </returns>
         public async Task OnPostAsync()
         {
 
@@ -63,14 +67,6 @@ namespace ECommerce_App.Pages.Products
             
             CartItem record = await cartService.AddItemToCart( cartItem.MealId, cartItem.Price, cartItem.Quantity, cartItem.CreateCartId);
             
-
-            //CookieOptions cookieoption = new CookieOptions();
-            //cookieoption.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
-            //HttpContext.Response.Cookies.Append("Name", Product.name, cookieoption);
-            //HttpContext.Response.Cookies.Append("Id", Product.Id.ToString(), cookieoption);
-            //HttpContext.Response.Cookies.Append("Price", Product.price.ToString(), cookieoption);
-
-
         }
     }
 }
